@@ -1,0 +1,60 @@
+package helper;
+
+
+import enums.RequestInfo;
+import exceptions.RequestNotDefined;
+import io.restassured.authentication.OAuthSignature;
+import io.restassured.specification.RequestSpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import utils.StoreApiInfo;
+
+
+public class AuthHelper extends ApiHelper {
+
+    private final Logger log = LogManager.getLogger(AuthHelper.class);
+
+
+    public void basicAuth(String user, String password) throws RequestNotDefined {
+        checkIfRequestDefined();
+        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
+        request.auth().basic(user, password);
+        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+    }
+
+    public void preBasicAuth(String user, String password) throws RequestNotDefined {
+        checkIfRequestDefined();
+        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
+        request.auth().preemptive().basic(user, password);
+        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+    }
+
+    public void oauth2(String var1) throws RequestNotDefined {
+        checkIfRequestDefined();
+        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
+        request.auth().oauth2(var1);
+        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+    }
+
+    public void oauth2(String var1, OAuthSignature var2) throws RequestNotDefined {
+        checkIfRequestDefined();
+        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
+        request.auth().oauth2(var1, var2);
+        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+    }
+
+    public void oauth(String var, String var1, String var2, String var3) throws RequestNotDefined {
+        checkIfRequestDefined();
+        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
+        request.auth().oauth(var, var1, var2, var3);
+        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+
+    }
+
+    public void addBearerToken(String token) throws RequestNotDefined {
+        HeaderHelper headerHelper = new HeaderHelper();
+        headerHelper.addBearerTokenToHeader(token);
+    }
+
+
+}
