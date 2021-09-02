@@ -12,3 +12,5 @@ reports
 
 # Project exclude paths
 /target/
+
+.idea
