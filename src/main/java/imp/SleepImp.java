@@ -2,7 +2,7 @@ package imp;
 
 import com.thoughtworks.gauge.Step;
 
-public class SeepImp {
+public class SleepImp {
 
     @Step("Sleep for <second> second")
     public void sleepForSecond(int second) throws InterruptedException {

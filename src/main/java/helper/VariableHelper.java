@@ -1,17 +1,17 @@
-package imp;
+package helper;
 
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.datastore.ScenarioDataStore;
 import com.thoughtworks.gauge.datastore.SpecDataStore;
 import com.thoughtworks.gauge.datastore.SuiteDataStore;
-import helper.FileHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.Utils;
 
-import java.io.File;
 import java.util.HashMap;
 
 public class VariableHelper {
@@ -32,6 +32,41 @@ public class VariableHelper {
         String filePath = getClass().getClassLoader().getResource(fileName).getPath();
         String value = fileHelper.readFileAsString(filePath);
         ScenarioDataStore.put(key, value);
+        log.info("{}, {} variable stored", key, fileName);
+    }
+
+    @Step({"Store json <file name>'s value from classpath with <key> during scenario",
+            "Senaryo boyunca json <dosya adı> içeriğini <key> anahtarı ile sakla"})
+    public void storeJsonFileValueDuringScenario(String fileName, String key) {
+        FileHelper fileHelper = new FileHelper();
+        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        String value = fileHelper.readFileAsString(filePath);
+        JsonObject jsonObject = JsonParser.parseString(value).getAsJsonObject();
+
+        ScenarioDataStore.put(key, jsonObject);
+        log.info("{}, {} variable stored", key, fileName);
+    }
+
+    @Step({"Store json <file name>'s value from classpath with <key> during spec",
+            "Spec boyunca json <dosya adı> içeriğini <key> anahtarı ile sakla"})
+    public void storeJsonFileValueDuringSpec(String fileName, String key) {
+        FileHelper fileHelper = new FileHelper();
+        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        String value = fileHelper.readFileAsString(filePath);
+        JsonObject jsonObject = JsonParser.parseString(value).getAsJsonObject();
+
+        SpecDataStore.put(key, jsonObject);
+        log.info("{}, {} variable stored", key, fileName);
+    }
+
+    @Step({"Store json <file name>'s value from classpath with <key> during suit",
+            "Suit boyunca json <dosya adı> içeriğini <key> anahtarı ile sakla"})
+    public void storeJsonFileValueDuringSuit(String fileName, String key) {
+        FileHelper fileHelper = new FileHelper();
+        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        String value = fileHelper.readFileAsString(filePath);
+        JsonObject jsonObject = JsonParser.parseString(value).getAsJsonObject();
+        SuiteDataStore.put(key, jsonObject);
         log.info("{}, {} variable stored", key, fileName);
     }
 

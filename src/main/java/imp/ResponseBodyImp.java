@@ -1,5 +1,7 @@
 package imp;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.datastore.ScenarioDataStore;
 import com.thoughtworks.gauge.datastore.SpecDataStore;
@@ -18,6 +20,14 @@ public class ResponseBodyImp extends ResponseBodyHelper {
             "Response'u String olarak <key> anahtarı ile senaryo boyunca sakla."})
     public void storeResponseForScenario(String key) throws NullResponse {
         ScenarioDataStore.put(key, getResponseAsString());
+        log.info("response stored with key \"{}\" during scenario", key);
+    }
+
+    @Step({"Store response as json with <key> during scenario",
+            "Response'u json olarak <key> anahtarı ile senaryo boyunca sakla."})
+    public void storeResponseForScenarioAsJson(String key) throws NullResponse {
+        JsonObject jsonObject = JsonParser.parseString(getResponseAsString()).getAsJsonObject();
+        ScenarioDataStore.put(key, jsonObject);
         log.info("response stored with key \"{}\" during scenario", key);
     }
 

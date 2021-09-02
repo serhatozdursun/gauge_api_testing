@@ -18,7 +18,7 @@ public class CompareImp {
     @Step("Get <key1> and <key> from scenario store and then compare, Are they equals?")
     public void dataCompareEquals(String key1, String key2) throws WrongFormatException {
         Object value1 = ScenarioDataStore.get(key1);
-        Object value2 = ScenarioDataStore.get(key1);
+        Object value2 = ScenarioDataStore.get(key2);
         Utils utils = new Utils();
         value2 = utils.parsSameType(value1,value2);
         assertEquals(value1, value2, "They aren't equals");
@@ -27,7 +27,7 @@ public class CompareImp {
     @Step("Get <key1> and <key> from spec store and then compare, Are they equals?")
     public void dataCompareEqualsFromSpecStore(String key1, String key2) throws WrongFormatException {
         Object value1 = SpecDataStore.get(key1);
-        Object value2 = SpecDataStore.get(key1);
+        Object value2 = SpecDataStore.get(key2);
         Utils utils = new Utils();
         value2 = utils.parsSameType(value1,value2);
         assertEquals(value1, value2, "They aren't equals");
@@ -36,7 +36,7 @@ public class CompareImp {
     @Step("Get <key1> and <key> from suit store and then compare, Are they equals?")
     public void dataCompareEqualsFromSuitStore(String key1, String key2) throws WrongFormatException {
         Object value1 = SuiteDataStore.get(key1);
-        Object value2 = SuiteDataStore.get(key1);
+        Object value2 = SuiteDataStore.get(key2);
         Utils utils = new Utils();
         value2 = utils.parsSameType(value1,value2);
         assertEquals(value1, value2, "They aren't equals");
