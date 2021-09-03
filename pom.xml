@@ -6,7 +6,7 @@
 
     <groupId>testing_frameworks</groupId>
     <artifactId>gauge_api_testing</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
 
     <properties>
@@ -21,7 +21,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
