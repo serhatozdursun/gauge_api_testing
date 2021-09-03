@@ -9,17 +9,20 @@ import helper.methods.PostHelper;
 import io.restassured.RestAssured;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SlackHelper {
     public static String webHook;
     private static Integer passCount = 0;
     private static Integer failCount = 0;
     private static Integer executed = 0;
-    private static String failedScenarios = "";
+    private static List<String> failedScenarios = new ArrayList<>();
     private static String startDate;
 
     private final Logger log = LogManager.getLogger(SlackHelper.class);
@@ -36,15 +39,21 @@ public class SlackHelper {
         if (webHook != null) {
             RestAssured.baseURI = webHook;
             JSONObject body = new JSONObject();
+            JSONArray attachments = new JSONArray();
             String message = "*Test Start:* " + startDate + "\n" +
                     "*" + executed + "* executed,  " +
                     "*" + passCount + "* passed, " +
                     "*" + failCount + "* failed";
-            if (failedScenarios != null) {
-                message = message + "\n *Failed scenarios is below:* \n" + failedScenarios;
+            if (failedScenarios.size() > 0) {
+
+                message = message + "\n *Failed scenarios is below:* \n";
+                for (String name : failedScenarios) {
+                    attachments.put(new JSONObject().put("text", name));
+                }
             }
 
             body.put("text", message);
+            body.put("attachments", attachments);
 
             sendMessageToSlackWebHook(body);
 
@@ -56,25 +65,28 @@ public class SlackHelper {
         executed++;
         if (context.getCurrentScenario().getIsFailing()) {
             failCount++;
-            failedScenarios += ":x: " + context.getCurrentScenario().getName() + "\n";
+            failedScenarios.add(":heavy_multiplication_x: " + context.getCurrentScenario().getName() + "\n");
         } else
             passCount++;
     }
 
     private void sendMessageToSlackWebHook(Object body) {
         try {
+
             ApiHelper api = new ApiHelper();
-            api.defineNewRequest();
+            RequestBodyHelper payload = new RequestBodyHelper();
             HeaderHelper header = new HeaderHelper();
             FilterHelper filter = new FilterHelper();
+            RequestUrlHelper url = new RequestUrlHelper();
+            PostHelper post = new PostHelper();
+
+            api.defineNewRequest();
             filter.addCustomLogFilter(400, 415, 500);
             header.addHeader("Content-type", "application/json");
-            RequestUrlHelper url = new RequestUrlHelper();
             url.addBaseUrl(webHook);
-            RequestBodyHelper payload = new RequestBodyHelper();
             payload.addBody(body.toString());
-            PostHelper post = new PostHelper();
             post.postRequest();
+
         } catch (RequestNotDefined e) {
             log.warn("Slack notification couldn't send");
         }
