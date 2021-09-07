@@ -1,11 +1,12 @@
 #Examples
 
+* Send slack message to "https://hooks.slack.com/services/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"
 
 ## Example 1
 
 * Log "*******Test Başladı*******"
 * Yeni bir api isteği tanımla
-* Header Ekle
+* Add Headers
     |Key           |Value            |
     |--------------|-----------------|
     |Content-Type  |application/json |
@@ -17,9 +18,10 @@
     |404         |
 * Log "*******Test Bitti*******"
 
-## Examples 2
+## Testt....
 
 * Define new request
+* Add Headers "table"
 * Add log filter with errorStatus
      |Status Codes|
      |400         |
@@ -35,7 +37,6 @@
 * Get response time as seconds and compare it, is it less then "5"?
 * Get "tags[1].name" from response and store it with "tagName" during scenario
 * Get "tags[1].name" from response and then compare with "adana", Are they equals?
-
 
 ## Document examples tr
 
@@ -71,3 +72,6 @@
 * Store response as string with "response1" during scenario
 * Validate json "response1" from the scenario stored data with schema "schemas/petSchema.json" in classpath
 * Get "id" from response and then compare with "25", Are they equals?
+x
+## chivas regal 1 lt
+* Get accessToken with Login Api 200 "https://staging-api.meditopia.com" with "sdasd@asdsa.com" and "1223"

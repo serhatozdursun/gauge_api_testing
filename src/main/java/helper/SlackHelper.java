@@ -4,6 +4,7 @@ import com.thoughtworks.gauge.AfterScenario;
 import com.thoughtworks.gauge.AfterSpec;
 import com.thoughtworks.gauge.BeforeSpec;
 import com.thoughtworks.gauge.ExecutionContext;
+import exceptions.NullResponse;
 import exceptions.RequestNotDefined;
 import helper.methods.PostHelper;
 import io.restassured.RestAssured;
@@ -29,7 +30,7 @@ public class SlackHelper {
 
     @BeforeSpec
     public void beforeSpec() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         startDate = dtf.format(now);
     }
@@ -79,6 +80,7 @@ public class SlackHelper {
             FilterHelper filter = new FilterHelper();
             RequestUrlHelper url = new RequestUrlHelper();
             PostHelper post = new PostHelper();
+            StatusCodeHelper checker = new StatusCodeHelper();
 
             api.defineNewRequest();
             filter.addCustomLogFilter(400, 415, 500);
@@ -86,9 +88,12 @@ public class SlackHelper {
             url.addBaseUrl(webHook);
             payload.addBody(body.toString());
             post.postRequest();
+            checker.checkStatusCode(200);
 
         } catch (RequestNotDefined e) {
             log.warn("Slack notification couldn't send");
+        } catch (NullResponse nullResponse) {
+            nullResponse.printStackTrace();
         }
     }
 

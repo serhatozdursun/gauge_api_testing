@@ -1,0 +1,50 @@
+# Get accessToken with Login Api 200 <baseUrl>
+* Define new request
+* Add base url <baseUrl>
+* Add log filter with errorStatus
+     |Status Codes|
+     |400         |
+     |405         |
+     |415         |
+     |422         |
+* Add endpoint "/api/v4/login"
+* Store "payloads/login_body.json"'s value from classpath with "body" during scenario
+* Basic auth with "meditasyon" and "1098"
+* Add Headers
+    |Key         |Value           |
+    |------------|----------------|
+    |Content-Type|application/json|
+    |Lang        |tr              |
+ * Add payload from scenario store with "body"
+ * Post request
+ * Check if status code is "200"
+ * Get "data.token.accessToken" from response and store it with "accessToken" during scenario
+ * Get "data.token.refreshToken" from response and store it with "refreshToken" during scenario
+  * Get "data.user.userID" from response and store it with "userID" during scenario
+
+
+  # Get accessToken with Login Api 200 <baseUrl> with <email> and <password>
+  * Define new request
+  * Add base url <baseUrl>
+  * Add log filter with errorStatus
+       |Status Codes|
+       |400         |
+       |405         |
+       |415         |
+       |422         |
+  * Add endpoint "/api/v4/login"
+  * Store "payloads/login_body.json"'s value from classpath with "body" during scenario
+  * Update "email"=<email> json from stored scenario with key "body"
+  * Update "password"=<password> json from stored scenario with key "body"
+  * Basic auth with "meditasyon" and "1098"
+  * Add Headers
+      |Key         |Value           |
+      |------------|----------------|
+      |Content-Type|application/json|
+      |Lang        |tr              |
+   * Add payload from scenario store with "body"
+   * Post request
+   * Check if status code is "200"
+   * Get "data.token.accessToken" from response and store it with "accessToken" during scenario
+   * Get "data.token.refreshToken" from response and store it with "refreshToken" during scenario
+    * Get "data.user.userID" from response and store it with "userID" during scenario
