@@ -72,6 +72,3 @@
 * Store response as string with "response1" during scenario
 * Validate json "response1" from the scenario stored data with schema "schemas/petSchema.json" in classpath
 * Get "id" from response and then compare with "25", Are they equals?
-x
-## chivas regal 1 lt
-* Get accessToken with Login Api 200 "https://staging-api.meditopia.com" with "sdasd@asdsa.com" and "1223"
