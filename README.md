@@ -57,3 +57,9 @@ You can add headers as a table
   |Connection    |keep-alive       |
 
 * Add multi-part data as content-type to header with default boundary \<boundary>
+
+With help this step you can give multipart content type as header. It calculates boundary automatically
+
+* Add SOAPAction \<action>
+
+With help this step you can set soap action as header.
