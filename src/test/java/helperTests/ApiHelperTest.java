@@ -13,10 +13,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.times;
 
-public class ApiHelperTest {
+class ApiHelperTest {
 
     @Test
-    public void defineNewRequestTest() {
+    void defineNewRequestTest() {
         MockedStatic<StoreApiInfo> storeApiInfoMockedStatic = mockStatic(StoreApiInfo.class);
 
         storeApiInfoMockedStatic.when(() -> StoreApiInfo.remove(RequestInfo.REQUEST.info))

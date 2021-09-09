@@ -1,6 +1,6 @@
 #Examples
 
-* Send slack message to "https://hooks.slack.com/services/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"
+* Send slack message to "https://hooks.slack.com/services/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"
 
 ## Example 1
 
@@ -21,7 +21,6 @@
 ## Testt....
 
 * Define new request
-* Add Headers "table"
 * Add log filter with errorStatus
      |Status Codes|
      |400         |
@@ -30,7 +29,7 @@
 * Add as a header "content-type" = "application/json"
 * Add base url "https://petstore.swagger.io"
 * Add endpoint "/v2/pet"
-* Add payload as String from resource "example.json"
+* Add payload as String from resource "payloads/example.json"
 * Post request
 * Check if status code is "200"
 * Get response time as milliseconds and compare it, is it less then "22000"?
@@ -72,3 +71,6 @@
 * Store response as string with "response1" during scenario
 * Validate json "response1" from the scenario stored data with schema "schemas/petSchema.json" in classpath
 * Get "id" from response and then compare with "25", Are they equals?
+
+## test sleep
+* Sleep for "100" milliSecond

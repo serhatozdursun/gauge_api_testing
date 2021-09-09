@@ -8,10 +8,10 @@ import utils.StoreApiInfo;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.times;
 
-public class AfterMethodsTests {
+class AfterMethodsTests {
 
     @Test
-    public void afterMethodsTest() {
+    void afterMethodsTest() {
         try (MockedStatic storeApi = mockStatic(StoreApiInfo.class)) {
             storeApi.when(StoreApiInfo::clear).thenCallRealMethod();
             storeApi.when(StoreApiInfo::remove).thenCallRealMethod();

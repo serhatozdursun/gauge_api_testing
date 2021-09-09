@@ -26,8 +26,6 @@
         <sonar.language>java</sonar.language>
         <sonar.projectKey>gauge_api_testing</sonar.projectKey>
         <sonar.host.url>http://localhost:9000 </sonar.host.url>
-        <sonar.projectKey>gauge_api_testing</sonar.projectKey>
-        <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
     </properties>
     <dependencies>
         <dependency>
