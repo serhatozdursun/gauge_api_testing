@@ -19,7 +19,6 @@
         <gauge.maven.plugin.version>1.4.3</gauge.maven.plugin.version>
         <junit.jupiter.version>5.7.1</junit.jupiter.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.projectKey>gauge_api_testing</sonar.projectKey>
         <mockitoversion>3.8.0</mockitoversion>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
@@ -27,6 +26,8 @@
         <sonar.language>java</sonar.language>
         <sonar.projectKey>gauge_api_testing</sonar.projectKey>
         <sonar.host.url>http://localhost:9000 </sonar.host.url>
+        <sonar.projectKey>gauge_api_testing</sonar.projectKey>
+        <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
     </properties>
     <dependencies>
         <dependency>
