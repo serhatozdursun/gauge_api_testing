@@ -16,7 +16,7 @@ import java.util.Map;
 public class RequestBodyHelper extends ApiHelper {
 
     private final Logger log = LogManager.getLogger(RequestBodyHelper.class);
-
+    private static final String LOG_INFO = "Body added to request \n Body detail: {}";
 
     /**
      * Add payload to request.
@@ -30,7 +30,7 @@ public class RequestBodyHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("Body added to request \n Body detail: {}", utils.prettyPrint(String.valueOf(body)));
+        log.info(LOG_INFO, utils.prettyPrint(String.valueOf(body)));
     }
 
     /**
@@ -44,7 +44,7 @@ public class RequestBodyHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("Body added to request \n Body detail: {}", body);
+        log.info(LOG_INFO, body);
     }
 
     /**
@@ -58,7 +58,7 @@ public class RequestBodyHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("Body added to request \n Body detail: {}", body);
+        log.info(LOG_INFO, body);
     }
 
     /**
@@ -72,7 +72,7 @@ public class RequestBodyHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("Body added to request \n Body file path: {}", body.getAbsolutePath());
+        log.info(LOG_INFO, body.getAbsolutePath());
     }
 
     /**
@@ -86,6 +86,6 @@ public class RequestBodyHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("Body added to request \n Body file path: {}", body.toString());
+        log.info(LOG_INFO, body.toString());
     }
 }

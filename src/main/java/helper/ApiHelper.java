@@ -41,8 +41,8 @@ public class ApiHelper {
     }
 
     public RequestSpecification defineNewRequest() {
-        StoreApiInfo.put(RequestInfo.RESPONSE.info, null);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, null);
+        StoreApiInfo.remove(RequestInfo.RESPONSE.info);
+        StoreApiInfo.remove(RequestInfo.REQUEST.info);
 
         StoreApiInfo.put(RequestInfo.REQUEST.info, RestAssured
                 .given());

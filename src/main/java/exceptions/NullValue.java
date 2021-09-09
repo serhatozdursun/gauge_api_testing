@@ -2,7 +2,7 @@ package exceptions;
 
 public class NullValue extends Exception {
 
-    String message;
+    final String  message;
 
     public NullValue(String selector) {
 

@@ -12,6 +12,7 @@ import java.util.Map;
 public class FormParamsHelper extends ApiHelper {
 
     private final Logger log = LogManager.getLogger(FormParamsHelper.class);
+    public static final String LOG_INFO = "{} = {} added to request as form param";
 
     /**
      * Add form param to request
@@ -25,7 +26,7 @@ public class FormParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParam(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("{} = {} added to request as form param", key, value);
+        log.info(LOG_INFO, key, value);
     }
 
     /**
@@ -39,7 +40,7 @@ public class FormParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParams(qParam);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("{} bulk added to request as form params ", qParam);
+        log.info(LOG_INFO, qParam);
     }
 
     /**
@@ -54,7 +55,7 @@ public class FormParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParam(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("{} = {} added to request as form param", key, String.valueOf(value));
+        log.info(LOG_INFO, key, String.valueOf(value));
     }
 
     /**
@@ -69,6 +70,6 @@ public class FormParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParams(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("{} = {} added to request as form param", key, String.valueOf(value));
+        log.info(LOG_INFO, key, String.valueOf(value));
     }
 }

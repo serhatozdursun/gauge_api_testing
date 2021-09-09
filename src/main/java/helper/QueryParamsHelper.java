@@ -12,7 +12,7 @@ import java.util.Map;
 public class QueryParamsHelper extends ApiHelper {
 
     private final Logger log = LogManager.getLogger(QueryParamsHelper.class);
-
+    private static final String LOG_INFO = "{} = {} added to request as query param";
     /**
      * Add query param to request
      *
@@ -25,7 +25,7 @@ public class QueryParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParam(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("{} = {} added to request as query param", key, value);
+        log.info(LOG_INFO, key, value);
     }
 
     /**
@@ -54,7 +54,7 @@ public class QueryParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParam(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("{} = {} added to request as query param", key, String.valueOf(value));
+        log.info(LOG_INFO, key, String.valueOf(value));
     }
 
     /**
@@ -69,6 +69,6 @@ public class QueryParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParams(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info("{} = {} added to request as query param", key, String.valueOf(value));
+        log.info(LOG_INFO, key, String.valueOf(value));
     }
 }

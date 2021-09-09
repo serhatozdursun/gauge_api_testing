@@ -1,12 +1,16 @@
 package helper;
 
+import enums.MimTypes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import static enums.MimTypes.*;
 
 public class FileHelper {
 
@@ -31,74 +35,60 @@ public class FileHelper {
 
 
     public String getFileMimeType(File file) {
-
         String type = file.getName().split("[.]")[1].toLowerCase();
-        switch ( type ) {
 
-            case "xml":
-                return "text/xml";
-            case "js":
-                return "application/javascript";
-            case "json":
-                return "application/json";
-            case "doc":
-                return "application/msword";
-            case "pdf":
-                return "application/pdf";
-            case "sql":
-                return "application/sql";
-            case "xls":
-                return "application/vnd.ms-excel";
-            case "ppt":
-                return "application/vnd.ms-powerpoint";
-            case "odt":
-                return "application/vnd.oasis.opendocument.text";
-            case "pptx":
-                return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
-            case "xlsx":
-                return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-            case "docx":
-                return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-            case "mpeg":
-                return "audio/mpeg";
-            case "ogg":
-                return "audio/ogg";
-            case "apng":
-                return "image/apng";
-            case "avif":
-                return "image/avif";
-            case "flif":
-                return "image/flif";
-            case "jpg":
-                return "image/jpeg";
-            case "jpeg":
-                return "image/jpeg";
-            case "jfif":
-                return "image/jpeg";
-            case "pjpeg":
-                return "image/jpeg";
-            case "pjp":
-                return "image/jpeg";
-            case "jxl":
-                return "image/jxl";
-            case "png":
-                return "image/png";
-            case "svg":
-                return "image/svg+xml";
-            case "webp":
-                return "image/webp";
-            case "css":
-                return "text/css";
-            case "csv":
-                return "text/csv";
-            case "html":
-                return "text/html";
-            case "htm":
-                return "text/html";
-            case "php":
-                return "text/php";
-            case "txt":
-                return "text/plain";
+        switch ( MimTypes.valueOf(type) ) {
+
+            case XLS:
+                return XLS.getText();
+            case JS:
+                return JS.getText();
+            case JSON:
+                return JSON.getText();
+            case DOC:
+                return DOC.getText();
+            case PDF:
+                return PDF.getText();
+            case SQL:
+                return SQL.getText();
+            case XLSX:
+                return XLSX.getText();
+            case PPT:
+                return PPT.getText();
+            case ODT:
+                return ODT.getText();
+            case PPTX:
+                return PPTX.getText();
+            case DOCX:
+                return DOCX.getText();
+            case APNG:
+                return APNG.getText();
+            case AVIF:
+                return AVIF.getText();
+            case FLIF:
+                return FLIF.getText();
+            case JPEG:
+                return JPEG.getText();
+            case JPG:
+                return JPG.getText();
+            case JFIF:
+                return JFIF.getText();
+            case PJPEG:
+                return PJPEG.getText();
+            case PJP:
+                return PJP.getText();
+            case JXL:
+                return JXL.getText();
+            case PNG:
+                return PNG.getText();
+            case SVG:
+                return SVG.getText();
+            case WEBP:
+                return WEBP.getText();
+            case CSV:
+                return CSV.getText();
+            case TXT:
+                return TXT.getText();
             default:
                 return null;
         }

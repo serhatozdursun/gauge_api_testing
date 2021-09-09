@@ -2,7 +2,7 @@ package helper;
 
 import enums.RequestInfo;
 import exceptions.RequestNotDefined;
-import filter.Filter;
+import filter.RestAssuredFilter;
 import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,12 +16,12 @@ public class FilterHelper extends ApiHelper {
     public void addCustomLogFilter(Integer... statusCode) throws RequestNotDefined {
         checkIfRequestDefined();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.filter(new Filter(statusCode));
+        request.filter(new RestAssuredFilter(statusCode));
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
         log.info("Log filters added");
     }
 
-    public void addFilter(Filter filter) throws RequestNotDefined {
+    public void addFilter(RestAssuredFilter filter) throws RequestNotDefined {
         checkIfRequestDefined();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.filter(filter);

@@ -1,14 +1,14 @@
 package exceptions;
 
 public class WrongFormatException extends Exception {
-    String message;
+    final String message;
 
     public WrongFormatException(Object firstElmType, Object secondElmType) {
-        String f_Type = firstElmType.getClass().getSimpleName();
-        String s_Type = secondElmType.getClass().getSimpleName();
+        String firstType = firstElmType.getClass().getSimpleName();
+        String secondType = secondElmType.getClass().getSimpleName();
         this.message = "The objects which is trying to compare arent same type" +
-                "" + firstElmType + "'s type ise " + f_Type + " " +
-                "" + secondElmType + "'s type ise " + s_Type + " " +
+                "" + firstElmType + "'s type ise " + firstType + " " +
+                "" + secondElmType + "'s type ise " + secondType + " " +
                 " They cant be compare";
     }
 

@@ -1,12 +1,16 @@
 package helper;
 
+import java.security.SecureRandom;
+import java.util.Random;
+
 public class TCKNHelper {
 
     public String getTckn() {
-        Integer pool1 = Double.valueOf(Math.floor(Math.random() * 90000 + 10000)).intValue();
+        Random rnd = new SecureRandom();
+        Integer pool1 = Integer.valueOf(String.valueOf(Math.floor(rnd.nextDouble() * 90000 + 10000)));
         String[] p1Chars = toStringArray(pool1);
         Integer pool1Sum = arraySum(p1Chars);
-        Integer pool2 = Double.valueOf(Math.floor(Math.random() * 9000 + 1000)).intValue();
+        Integer pool2 = Integer.valueOf(String.valueOf(Math.floor(rnd.nextDouble()  * 9000 + 1000)));
         String[] p2Chars = toStringArray(pool2);
         Integer pool2Sum = arraySum(p2Chars);
         int digit10 = calculateDigit10(pool1Sum, pool2Sum);

@@ -2,8 +2,8 @@ package helper;
 
 import enums.GsmType;
 import enums.MailType;
-import org.apache.commons.lang3.RandomStringUtils;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class RandomHelper {
@@ -54,8 +54,8 @@ public class RandomHelper {
      * @return String
      */
     public String generateGsmNumber(GsmType gsmType) {
-        int areCodeListSize = gsmType.areCodeList.size();
-        String areaCode = gsmType.areCodeList.get(generateNumber(areCodeListSize));
+        int areCodeListSize = gsmType.getAreCodeList().size();
+        String areaCode = gsmType.getAreCodeList().get(generateNumber(areCodeListSize));
         String bodyCode = generateNumberByNumberOfDigit(7);
         return areaCode + bodyCode;
     }
@@ -86,7 +86,8 @@ public class RandomHelper {
      * @return int
      */
     public int generateNumber(int bound) {
-        return new Random().nextInt(bound);
+        SecureRandom random = new SecureRandom();
+        return random.nextInt(bound);
     }
 
 
@@ -97,7 +98,8 @@ public class RandomHelper {
      * @return String
      */
     public String generateAlphanumeric(int numberOfDigit) {
-        return RandomStringUtils.randomAlphanumeric(numberOfDigit);
+        String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        return createRandomString(chars, numberOfDigit);
     }
 
     /**
@@ -107,7 +109,16 @@ public class RandomHelper {
      * @return String
      */
     public String generateAlphabetic(int numberOfDigit) {
-        return RandomStringUtils.randomAlphabetic(numberOfDigit);
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        return createRandomString(chars, numberOfDigit);
+    }
+
+    private String createRandomString(String source, int numberOfDigit) {
+        Random rnd = new SecureRandom();
+        StringBuilder stringBuilder = new StringBuilder(numberOfDigit);
+        for (int i = 0; i < numberOfDigit; i++)
+            stringBuilder.append(source.charAt(rnd.nextInt(source.length())));
+        return stringBuilder.toString();
     }
 
     /**

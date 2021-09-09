@@ -40,7 +40,7 @@ public class ParseHelper {
             log.warn("Found json value is boolean, but the {}, isn't boolean string, please set " +
                     "a new ture or false string for update", value);
         }
-        return null;
+        return false;
     }
 
     /**

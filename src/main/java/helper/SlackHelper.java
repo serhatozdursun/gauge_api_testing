@@ -4,10 +4,8 @@ import com.thoughtworks.gauge.AfterScenario;
 import com.thoughtworks.gauge.AfterSpec;
 import com.thoughtworks.gauge.BeforeSpec;
 import com.thoughtworks.gauge.ExecutionContext;
-import exceptions.NullResponse;
-import exceptions.RequestNotDefined;
-import helper.methods.PostHelper;
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
@@ -30,15 +28,12 @@ public class SlackHelper {
 
     @BeforeSpec
     public void beforeSpec() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        startDate = dtf.format(now);
+        setStartDate();
     }
 
     @AfterSpec
     public void sendSlackMessage() {
         if (webHook != null) {
-            RestAssured.baseURI = webHook;
             JSONObject body = new JSONObject();
             JSONArray attachments = new JSONArray();
             String message = "*Test Start:* " + startDate + "\n" +
@@ -62,39 +57,35 @@ public class SlackHelper {
     }
 
     @AfterScenario
-    public void countFailAndPass(ExecutionContext context) {
+    public void updateStatus(ExecutionContext context) {
+        countPassFailAndExecuted(context);
+    }
+
+    private void sendMessageToSlackWebHook(Object body) {
+        Response response = RestAssured
+                .given()
+                .header("Content-type", "application/json")
+                .baseUri(webHook)
+                .body(body.toString())
+                .post();
+        if (response.statusCode() != 200) {
+            log.warn("Slack message couldn't send, please check your webhook is active?");
+        }
+    }
+
+    private synchronized static void setStartDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        startDate = dtf.format(now);
+    }
+
+    private synchronized static void countPassFailAndExecuted(ExecutionContext context){
         executed++;
         if (context.getCurrentScenario().getIsFailing()) {
             failCount++;
             failedScenarios.add(":heavy_multiplication_x: " + context.getCurrentScenario().getName() + "\n");
         } else
             passCount++;
-    }
-
-    private void sendMessageToSlackWebHook(Object body) {
-        try {
-
-            ApiHelper api = new ApiHelper();
-            RequestBodyHelper payload = new RequestBodyHelper();
-            HeaderHelper header = new HeaderHelper();
-            FilterHelper filter = new FilterHelper();
-            RequestUrlHelper url = new RequestUrlHelper();
-            PostHelper post = new PostHelper();
-            StatusCodeHelper checker = new StatusCodeHelper();
-
-            api.defineNewRequest();
-            filter.addCustomLogFilter(400, 415, 500);
-            header.addHeader("Content-type", "application/json");
-            url.addBaseUrl(webHook);
-            payload.addBody(body.toString());
-            post.postRequest();
-            checker.checkStatusCode(200);
-
-        } catch (RequestNotDefined e) {
-            log.warn("Slack notification couldn't send");
-        } catch (NullResponse nullResponse) {
-            nullResponse.printStackTrace();
-        }
     }
 
 }

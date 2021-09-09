@@ -12,7 +12,6 @@ import utils.Utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class CompareImp {
 
     @Step("Get <key1> and <key> from scenario store and then compare, Are they equals?")

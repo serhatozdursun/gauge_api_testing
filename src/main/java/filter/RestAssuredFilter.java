@@ -12,15 +12,19 @@ import utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
-public class Filter implements io.restassured.filter.Filter {
+public class RestAssuredFilter implements io.restassured.filter.Filter {
 
-    private final Logger log = LogManager.getLogger(Filter.class);
+    private final Logger log = LogManager.getLogger(RestAssuredFilter.class);
     Integer[] failedStatusCode;
+    private static final String LINE = "-------------------------------";
 
-    public Filter(Integer... failedStatusCode) {
+
+    public RestAssuredFilter(Integer... failedStatusCode) {
         this.failedStatusCode = failedStatusCode;
     }
 
@@ -49,10 +53,9 @@ public class Filter implements io.restassured.filter.Filter {
         }
         return response;
     }
-
     private String getFileAsString(File file) {
         try {
-            return FileUtils.readFileToString(file, "UTF-8");
+            return FileUtils.readFileToString(file, StandardCharsets.UTF_8);
         } catch (IOException e) {
             return "null";
         }
@@ -61,14 +64,14 @@ public class Filter implements io.restassured.filter.Filter {
     private String getRequestBody(FilterableRequestSpecification reqSpec) {
 
         Object reqBody;
-        String body_type;
+        String bodyType;
         try {
-            body_type = reqSpec.getBody().getClass().getName();
+            bodyType = reqSpec.getBody().getClass().getName();
         } catch (NullPointerException e) {
-            body_type = null;
+            bodyType = null;
         }
 
-        if (body_type != null && body_type.equalsIgnoreCase("java.io.File")) {
+        if (bodyType != null && bodyType.equalsIgnoreCase("java.io.File")) {
             reqBody = getFileAsString(reqSpec.getBody());
         } else {
             reqBody = reqSpec.getBody();
@@ -79,59 +82,52 @@ public class Filter implements io.restassured.filter.Filter {
 
     private void logErrorStatus(Response response, FilterableRequestSpecification reqSpec) {
         Utils utils = new Utils();
-
-        log.error("-------------------------------");
+        log.error(LINE);
         log.error("Methods:");
         log.error(reqSpec.getMethod());
 
-        log.error("-------------------------------");
+        log.error(LINE);
         log.error("URI:");
         log.error(reqSpec.getURI());
 
-        log.error("-------------------------------");
+        log.error(LINE);
         log.error("Request Headers:");
         log.error(reqSpec.getHeaders());
 
-        if (reqSpec.getQueryParams().size() > 0) {
-            log.error("-------------------------------");
+        if (!reqSpec.getQueryParams().isEmpty()) {
+            log.error(LINE);
             log.error("Request Query Parameters:");
-            for (Map.Entry<String, String> entery : reqSpec.getQueryParams().entrySet()) {
-                log.error(entery.getKey() + ":" + entery.getValue());
-            }
+            logMap(reqSpec.getQueryParams(),false);
         }
         if (reqSpec.getFormParams().size() > 0) {
-            log.error("-------------------------------");
+            log.error(LINE);
             log.error("Request Form Parameters:");
-            for (Map.Entry<String, String> entery : reqSpec.getFormParams().entrySet()) {
-                log.error(entery.getKey() + ":" + entery.getValue());
-            }
+            logMap(reqSpec.getFormParams(),false);
         }
-
+        String prettyJson = utils.prettyPrint(getRequestBody(reqSpec));
         if (getRequestBody(reqSpec) != null && getRequestBody(reqSpec).length() > 0) {
-            log.error("-------------------------------");
+            log.error(LINE);
             log.error("Request Body");
-            log.error(utils.prettyPrint(getRequestBody(reqSpec)));
+            log.error(prettyJson);
         }
 
 
-        log.error("-------------------------------");
+        log.error(LINE);
         log.error("Response Status Code");
         log.error(response.statusCode());
 
-        log.error("-------------------------------");
+        log.error(LINE);
         log.error("Response Headers:");
         log.error(response.getHeaders());
 
-        if (reqSpec.getMultiPartParams().size() > 0) {
-            log.error("-------------------------------");
+        if (!reqSpec.getMultiPartParams().isEmpty()) {
+            log.error(LINE);
             log.error("Multi-form data:");
-            for (MultiPartSpecification params : reqSpec.getMultiPartParams()) {
-                log.error(params);
-            }
+            logMapMultiPartSpecification(reqSpec.getMultiPartParams(),false);
         }
 
-        log.error("-------------------------------");
-        log.error(utils.prettyPrint(response.asString()));
+        log.error(LINE);
+        log.error(prettyJson);
 
     }
 
@@ -140,59 +136,71 @@ public class Filter implements io.restassured.filter.Filter {
 
         Utils utils = new Utils();
 
-        log.info("-------------------------------");
+        log.info(LINE);
         log.info("Methods:");
         log.info(reqSpec.getMethod());
 
-        log.info("-------------------------------");
+        log.info(LINE);
         log.info("URI:");
         log.info(reqSpec.getURI());
 
-        log.info("-------------------------------");
+        log.info(LINE);
         log.info("Request Headers:");
         log.info(reqSpec.getHeaders());
 
-        if (reqSpec.getQueryParams().size() > 0) {
-            log.info("-------------------------------");
+        if (!reqSpec.getQueryParams().isEmpty()) {
+            log.info(LINE);
             log.info("Request Query Parameters:");
-            for (Map.Entry<String, String> entery : reqSpec.getQueryParams().entrySet()) {
-                log.info(entery.getKey() + ":" + entery.getValue());
-            }
+            logMap(reqSpec.getQueryParams(), true);
         }
 
-        if (reqSpec.getFormParams().size() > 0) {
-            log.info("-------------------------------");
+        if (!reqSpec.getFormParams().isEmpty()) {
+            log.info(LINE);
             log.info("Request Form Parameters:");
-            for (Map.Entry<String, String> entery : reqSpec.getFormParams().entrySet()) {
-                log.info(entery.getKey() + ":" + entery.getValue());
-            }
+            logMap(reqSpec.getFormParams(), true);
         }
-
+        String prettyJson = utils.prettyPrint(getRequestBody(reqSpec));
         if (getRequestBody(reqSpec) != null && !getRequestBody(reqSpec).equalsIgnoreCase("null")) {
-            log.info("-------------------------------");
+            log.info(LINE);
             log.info("Request Body");
-            log.info(utils.prettyPrint(getRequestBody(reqSpec)));
+            log.info(prettyJson);
         }
 
 
-        log.info("-------------------------------");
+        log.info(LINE);
         log.info("Response Status Code");
         log.info(response.statusCode());
 
-        log.info("-------------------------------");
+        log.info(LINE);
         log.info("Response Headers:");
         log.info(response.getHeaders());
 
-        if (reqSpec.getMultiPartParams().size() > 0) {
-            log.info("-------------------------------");
+        if (!reqSpec.getMultiPartParams().isEmpty()) {
+            log.info(LINE);
             log.info("Multi-form data:");
-            for (MultiPartSpecification params : reqSpec.getMultiPartParams()) {
-                log.info(params);
-            }
+            logMapMultiPartSpecification(reqSpec.getMultiPartParams(), true);
         }
 
-        log.info("-------------------------------");
+        log.info(LINE);
         log.info("Response Body:");
-        log.info(utils.prettyPrint(response.asString()));
+        log.info(prettyJson);
+    }
+
+    private void logMapMultiPartSpecification(List<MultiPartSpecification> reqSpec, boolean isInfo) {
+        for (Object params : reqSpec) {
+            if (isInfo)
+                log.info(params);
+            else
+                log.error(params);
+        }
+    }
+
+    private void logMap(Map<String,String> map, boolean isInfo) {
+        map.forEach((key, value) -> {
+            if (isInfo)
+                log.info("{}:{}", key, value);
+            else
+                log.error("{}:{}", key, value);
+        });
     }
 }

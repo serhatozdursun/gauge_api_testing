@@ -42,7 +42,6 @@ public class XmlHelper {
             builder = builderFactory.newDocumentBuilder();
             return builder.parse(new InputSource(new StringReader(xml)));
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
             log.error("Xml file couldn't convert to xml.");
         }
         return null;
@@ -60,7 +59,6 @@ public class XmlHelper {
             XPath xpath = XPathFactory.newInstance().newXPath();
             return (NodeList) xpath.evaluate(xPath, doc, XPathConstants.NODESET);
         } catch (XPathExpressionException e) {
-            e.printStackTrace();
             log.error(" Couldn't find element by {} from {}", doc, xPath);
         }
         return null;

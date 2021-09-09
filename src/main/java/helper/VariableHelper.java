@@ -13,93 +13,95 @@ import org.apache.logging.log4j.Logger;
 import utils.Utils;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class VariableHelper {
 
     private final Logger log = LogManager.getLogger(VariableHelper.class);
+    private static final String LOG_INFO = "{}, {} variable stored";
 
 
     @Step({"Store variable <key> = <value> during scenario", "Senaryo boyunca değişkeni sakla <key> = <value>"})
     public void storeVariableDuringScenario(String key, String value) {
         ScenarioDataStore.put(key, value);
-        log.info("{}, {} variable stored", key, value);
+        log.info(LOG_INFO, key, value);
     }
 
     @Step({"Store <file name>'s value from classpath with <key> during scenario",
             "Senaryo boyunca <dosya adı> içeriğini <key> anahtarı ile sakla"})
     public void storeVariableDuringScenarioFromFile(String fileName, String key) {
         FileHelper fileHelper = new FileHelper();
-        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        String filePath = Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getPath();
         String value = fileHelper.readFileAsString(filePath);
         ScenarioDataStore.put(key, value);
-        log.info("{}, {} variable stored", key, fileName);
+        log.info(LOG_INFO, key, fileName);
     }
 
     @Step({"Store json <file name>'s value from classpath with <key> during scenario",
             "Senaryo boyunca json <dosya adı> içeriğini <key> anahtarı ile sakla"})
     public void storeJsonFileValueDuringScenario(String fileName, String key) {
         FileHelper fileHelper = new FileHelper();
-        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        String filePath = Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getPath();
         String value = fileHelper.readFileAsString(filePath);
         JsonObject jsonObject = JsonParser.parseString(value).getAsJsonObject();
 
         ScenarioDataStore.put(key, jsonObject);
-        log.info("{}, {} variable stored", key, fileName);
+        log.info(LOG_INFO, key, fileName);
     }
 
     @Step({"Store json <file name>'s value from classpath with <key> during spec",
             "Spec boyunca json <dosya adı> içeriğini <key> anahtarı ile sakla"})
     public void storeJsonFileValueDuringSpec(String fileName, String key) {
         FileHelper fileHelper = new FileHelper();
-        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        String filePath = Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getPath();
         String value = fileHelper.readFileAsString(filePath);
         JsonObject jsonObject = JsonParser.parseString(value).getAsJsonObject();
 
         SpecDataStore.put(key, jsonObject);
-        log.info("{}, {} variable stored", key, fileName);
+        log.info(LOG_INFO, key, fileName);
     }
 
     @Step({"Store json <file name>'s value from classpath with <key> during suit",
             "Suit boyunca json <dosya adı> içeriğini <key> anahtarı ile sakla"})
     public void storeJsonFileValueDuringSuit(String fileName, String key) {
         FileHelper fileHelper = new FileHelper();
-        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        String filePath = Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getPath();
         String value = fileHelper.readFileAsString(filePath);
         JsonObject jsonObject = JsonParser.parseString(value).getAsJsonObject();
         SuiteDataStore.put(key, jsonObject);
-        log.info("{}, {} variable stored", key, fileName);
+        log.info(LOG_INFO, key, fileName);
     }
 
     @Step({"Store variable <key> = <value> during suite", "Suit boyunca değişkeni sakla <key> = <value>"})
     public void storeVariableDuringSuite(String key, String value) {
         SuiteDataStore.put(key, value);
-        log.info("{}, {} variable stored", key, value);
+        log.info(LOG_INFO, key, value);
     }
 
     @Step({"Store <file name>'s value from classpath with <key> during suite",
             "Suite boyunca <dosya adı> içeriğini <anahtarı ile sakla.>"})
     public void storeVariableDuringSuiteFromFile(String key, String fileName) {
         FileHelper fileHelper = new FileHelper();
-        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        String filePath = Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getPath();
         String value = fileHelper.readFileAsString(filePath);
         SuiteDataStore.put(key, value);
-        log.info("{}, {} variable stored", key, fileName);
+        log.info(LOG_INFO, key, fileName);
     }
 
     @Step({"Store variable <key> = <value> during spec", "Spec boyunca değişkeni sakla <key> = <value>"})
     public void storeVariableDuringSpec(String key, String value) {
         SpecDataStore.put(key, value);
-        log.info("{}, {} variable stored", key, value);
+        log.info(LOG_INFO, key, value);
     }
 
     @Step({"Store <file name>'s value from classpath with <key> during spec",
             "Spec boyunca <dosya adı> içeriğini <anahtarı ile sakla.>"})
     public void storeVariableDuringSpecFromFile(String key, String fileName) {
         FileHelper fileHelper = new FileHelper();
-        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        String filePath = Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getPath();
         String value = fileHelper.readFileAsString(filePath);
         SpecDataStore.put(key, value);
-        log.info("{}, {} variable stored", key, fileName);
+        log.info(LOG_INFO, key, fileName);
     }
 
     @Step("Remove <key> from store")

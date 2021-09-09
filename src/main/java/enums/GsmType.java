@@ -8,9 +8,11 @@ public enum GsmType {
     VODAFONE(Arrays.asList("541", "542", "543", "544", "545", "546", "547", "548", "549")),
     TURK_TELEKOM(Arrays.asList("501", "505", "507", "551", "552", "553", "554", "555", "559"));
 
-    public List<String> areCodeList;
+    private List<String> areCodeList;
 
     GsmType(List<String> areCodeList) {
         this.areCodeList = areCodeList;
     }
+
+    public List<String> getAreCodeList(){ return areCodeList;}
 }

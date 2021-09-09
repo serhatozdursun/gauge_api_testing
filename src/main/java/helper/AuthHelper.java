@@ -20,6 +20,7 @@ public class AuthHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.auth().basic(user, password);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        log.info("Basic auth to request as user: {}, password{}", user, password);
     }
 
     public void preBasicAuth(String user, String password) throws RequestNotDefined {
@@ -43,10 +44,10 @@ public class AuthHelper extends ApiHelper {
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
     }
 
-    public void oauth(String var, String var1, String var2, String var3) throws RequestNotDefined {
+    public void oauth(String var1, String var2, String var3, String var4) throws RequestNotDefined {
         checkIfRequestDefined();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.auth().oauth(var, var1, var2, var3);
+        request.auth().oauth(var1, var2, var3, var4);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
 
     }
