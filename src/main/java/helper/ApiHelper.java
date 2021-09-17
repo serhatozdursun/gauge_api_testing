@@ -31,7 +31,7 @@ public class ApiHelper {
     /**
      * response Check if response is null.
      *
-     * @throws RequestNotDefined if response is null this exception will throw
+     * @throws NullResponse if response is null this exception will throw
      */
     protected void checkIfResponseNull() throws NullResponse {
         if (StoreApiInfo.get(RequestInfo.RESPONSE.info) == null) {

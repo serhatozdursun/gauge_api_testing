@@ -7,7 +7,7 @@ import exceptions.RequestNotDefined;
 import helper.HeaderHelper;
 import utils.Utils;
 
-import java.util.HashMap;
+import java.util.Map;
 
 
 public class HeaderImp extends HeaderHelper {
@@ -21,7 +21,7 @@ public class HeaderImp extends HeaderHelper {
     @Step({"Add Headers <table>", "Header Ekle <TableRow>"})
     public void addHeadersToReq(Table table) throws RequestNotDefined {
         Utils utils = new Utils();
-        HashMap<String, Object> headers = utils.gaugeDataTableToMap(table);
+        Map<String, Object> headers = utils.gaugeDataTableToMap(table);
         addHeaders(headers);
     }
 

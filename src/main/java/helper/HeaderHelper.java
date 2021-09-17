@@ -14,7 +14,7 @@ import static io.restassured.config.MultiPartConfig.multiPartConfig;
 
 public class HeaderHelper extends ApiHelper {
 
-    private final Logger log = LogManager.getLogger(ApiHelper.class);
+    private final Logger log = LogManager.getLogger(HeaderHelper.class);
 
     /**
      * defineNewRequest() it add bulk header to request

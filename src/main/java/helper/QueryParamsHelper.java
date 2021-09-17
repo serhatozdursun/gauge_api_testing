@@ -54,7 +54,8 @@ public class QueryParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParam(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info(LOG_INFO, key, String.valueOf(value));
+        var stringValue = String.valueOf(value);
+        log.info(LOG_INFO, key, stringValue);
     }
 
     /**
@@ -69,6 +70,7 @@ public class QueryParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParams(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info(LOG_INFO, key, String.valueOf(value));
+        var stringValue = String.valueOf(value);
+        log.info(LOG_INFO, key, stringValue);
     }
 }

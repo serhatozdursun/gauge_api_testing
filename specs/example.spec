@@ -1,6 +1,6 @@
 #Examples
 
-* Send slack message to "https://hooks.slack.com/services/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"
+* Send test result as slack message to "qa"
 
 ## Example 1
 
@@ -71,6 +71,7 @@
 * Store response as string with "response1" during scenario
 * Validate json "response1" from the scenario stored data with schema "schemas/petSchema.json" in classpath
 * Get "id" from response and then compare with "25", Are they equals?
+
 
 ## test sleep
 * Sleep for "100" milliSecond

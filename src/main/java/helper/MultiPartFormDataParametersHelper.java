@@ -13,14 +13,14 @@ import java.io.File;
 public class MultiPartFormDataParametersHelper extends ApiHelper {
 
     private final Logger log = LogManager.getLogger(MultiPartFormDataParametersHelper.class);
-    private static final String LOG_INFO = "{} add to request as multi-part form data";
+    private static final String LOG_INFO = "{} = {} add to request as multi-part form data";
 
     public void addMultiPartFormData(File file) throws RequestNotDefined {
         checkIfRequestDefined();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.multiPart(file);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info(LOG_INFO, file.getName());
+        log.info("{} add to request as multi-part form data", file.getName());
     }
 
     public void addMultiPartFormData(String key, File file) throws RequestNotDefined {

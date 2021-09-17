@@ -18,6 +18,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Utils {
 
@@ -66,7 +67,6 @@ public class Utils {
      */
     private String xmlPrettyPrint(String uglyXml) {
         try {
-
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
 
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -100,12 +100,10 @@ public class Utils {
         return isNumber;
     }
 
-    public HashMap<String, Object> gaugeDataTableToMap(Table table) {
+    public Map<String, Object> gaugeDataTableToMap(Table table) {
         List<TableRow> rows = table.getTableRows();
-        HashMap<String, Object> map = new HashMap<>();
-        for (TableRow row : rows) {
-            map.put(row.getCellValues().get(0), row.getCellValues().get(1));
-        }
+        var map = new HashMap<String, Object>();
+        rows.forEach(row->  map.put(row.getCellValues().get(0), row.getCellValues().get(1)));
         return map;
     }
 

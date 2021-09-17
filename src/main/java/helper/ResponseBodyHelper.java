@@ -124,12 +124,12 @@ public class ResponseBodyHelper extends ApiHelper {
     public Object getResponseElementEvenNull(String selector) throws NullResponse {
         String body = getResponseAsString();
         DocumentHelper documentHelper = new DocumentHelper();
-        if (documentHelper.isJsonOrXml(body) == JSON) {
+        if (documentHelper.isJsonOrXml(body) == JSON)
             return getJsonPathValue(selector);
-        } else if (documentHelper.isJsonOrXml(body) == XML) {
+        else if (documentHelper.isJsonOrXml(body) == XML)
             return getXmlPathValue(selector);
-        } else {
+        else
             return null;
-        }
+
     }
 }

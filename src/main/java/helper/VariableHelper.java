@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.Utils;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class VariableHelper {
@@ -114,7 +114,7 @@ public class VariableHelper {
             "Tabloyu map objesi olarak <key> anahtarı ile senaryo boyunca sakla <table>"})
     public void storeTable(String key, Table table) {
         Utils utils = new Utils();
-        HashMap<String, Object> storeData = utils.gaugeDataTableToMap(table);
+        Map<String, Object> storeData = utils.gaugeDataTableToMap(table);
         ScenarioDataStore.put(key, storeData);
     }
 }

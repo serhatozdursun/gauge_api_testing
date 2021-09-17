@@ -40,7 +40,7 @@ public class FormParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParams(qParam);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info(LOG_INFO, qParam);
+        log.info("{} added to request as form param", qParam);
     }
 
     /**
@@ -55,7 +55,8 @@ public class FormParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParam(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info(LOG_INFO, key, String.valueOf(value));
+        var stringValue = String.valueOf(value);
+        log.info(LOG_INFO, key, stringValue);
     }
 
     /**
@@ -70,6 +71,7 @@ public class FormParamsHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParams(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info(LOG_INFO, key, String.valueOf(value));
+        var stringValue = String.valueOf(value);
+        log.info(LOG_INFO, key, stringValue);
     }
 }

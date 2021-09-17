@@ -7,7 +7,7 @@ import exceptions.RequestNotDefined;
 import helper.QueryParamsHelper;
 import utils.Utils;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class QueryParamImp extends QueryParamsHelper {
 
@@ -26,7 +26,7 @@ public class QueryParamImp extends QueryParamsHelper {
     @Step({"Add query parameter <table>", "Query parametresi ekle <table>"})
     public void addQueryParamsToReq(Table table) throws RequestNotDefined {
         Utils utils = new Utils();
-        HashMap<String, Object> params = utils.gaugeDataTableToMap(table);
+        Map<String, Object> params = utils.gaugeDataTableToMap(table);
         addQueryParams(params);
     }
 

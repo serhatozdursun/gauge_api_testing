@@ -1,13 +1,14 @@
 package utils;
 
-import java.util.Collections;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class StoreApiInfo {
 
     private static final ThreadLocal<ConcurrentHashMap<String, Object>> map = ThreadLocal.withInitial(ConcurrentHashMap::new);
 
+    private StoreApiInfo() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static synchronized void put(String key, Object value) {
 
@@ -27,11 +28,6 @@ public class StoreApiInfo {
 
     public static synchronized Object get(Object key) {
         return key != null ? map.get().get(key) : null;
-    }
-
-    public static synchronized Set<Object> items() {
-
-        return Collections.unmodifiableSet((map.get()).keySet());
     }
 
     public static synchronized void clear() {

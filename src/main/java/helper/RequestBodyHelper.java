@@ -30,7 +30,8 @@ public class RequestBodyHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info(LOG_INFO, utils.prettyPrint(String.valueOf(body)));
+        String stringBody = utils.prettyPrint(String.valueOf(body));
+        log.info(LOG_INFO, stringBody);
     }
 
     /**
@@ -86,6 +87,8 @@ public class RequestBodyHelper extends ApiHelper {
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-        log.info(LOG_INFO, body.toString());
+        var utils = new Utils();
+        var stringBody = utils.prettyPrint(body.toString());
+        log.info(LOG_INFO, stringBody);
     }
 }
