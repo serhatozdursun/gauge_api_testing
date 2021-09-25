@@ -1,7 +1,6 @@
 package helper;
 
 import enums.RequestInfo;
-import exceptions.RequestNotDefined;
 import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,10 +17,9 @@ public class QueryParamsHelper extends ApiHelper {
      *
      * @param key   is param key as string.
      * @param value is param value as string.
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    public void addQueryParam(String key, String value) throws RequestNotDefined {
-        checkIfRequestDefined();
+    public void addQueryParam(String key, String value) {
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParam(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
@@ -32,10 +30,9 @@ public class QueryParamsHelper extends ApiHelper {
      * Add bulk query param to request
      *
      * @param qParam bulk params as map object
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    public void addQueryParams(Map<String, Object> qParam) throws RequestNotDefined {
-        checkIfRequestDefined();
+    public void addQueryParams(Map<String, Object> qParam) {
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParams(qParam);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
@@ -47,10 +44,9 @@ public class QueryParamsHelper extends ApiHelper {
      *
      * @param key   is param key as string.
      * @param value is param value as object.
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    public void addQueryParam(String key, Object value) throws RequestNotDefined {
-        checkIfRequestDefined();
+    public void addQueryParam(String key, Object value) {
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParam(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
@@ -63,10 +59,9 @@ public class QueryParamsHelper extends ApiHelper {
      *
      * @param key   is param key as string.
      * @param value is param value as object.
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    public void addQueryParams(String key, Object value) throws RequestNotDefined {
-        checkIfRequestDefined();
+    public void addQueryParams(String key, Object value) {
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParams(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);

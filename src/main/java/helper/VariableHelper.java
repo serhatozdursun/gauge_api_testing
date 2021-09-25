@@ -116,5 +116,6 @@ public class VariableHelper {
         Utils utils = new Utils();
         Map<String, Object> storeData = utils.gaugeDataTableToMap(table);
         ScenarioDataStore.put(key, storeData);
+        log.info("\"{}\" stored as table with key \"{}\"",storeData,key);
     }
 }

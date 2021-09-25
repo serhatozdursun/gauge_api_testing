@@ -108,18 +108,20 @@ public class SlackHelper {
         var client = Slack.getInstance().methods();
         var id = findConversation(channelId, token);
         var text = createText();
-        try {
-            var result = client.chatPostMessage(r -> r
-                    .token(token)
-                    .channel(id)
-                    .attachments(createAttachments())
-                    .text(text));
-            if (!result.isOk()) {
-                log.warn("Slack message couldn't send, the message: {} ", result.getMessage());
-            }
+        if (id != null) {
+            try {
+                var result = client.chatPostMessage(r -> r
+                        .token(token)
+                        .channel(id)
+                        .attachments(createAttachments())
+                        .text(text));
+                if (!result.isOk()) {
+                    log.warn("Slack message couldn't send, the message: {} ", result.getMessage());
+                }
 
-        } catch (IOException | SlackApiException e) {
-            log.error("error: {}", e.getMessage(), e);
+            } catch (IOException | SlackApiException e) {
+                log.error("error: {}", e.getMessage(), e);
+            }
         }
     }
 
@@ -133,13 +135,17 @@ public class SlackHelper {
                     // The token you used to initialize your app
                     .token(token)
             );
-            for (Conversation channel : result.getChannels()) {
-                if (channel.getName().equals(name)) {
-                    conversationId = channel.getId();
-                    // Print result
-                    log.info("Found conversation ID: {}", conversationId);
-                    // Break from for loop
-                    break;
+            if (result.getError() != null) {
+                log.warn("Slack message couldn't send error message: {} ", result.getError());
+            } else {
+                for (Conversation channel : result.getChannels()) {
+                    if (channel.getName().equals(name)) {
+                        conversationId = channel.getId();
+                        // Print result
+                        log.info("Found conversation ID: {}", conversationId);
+                        // Break from for loop
+                        break;
+                    }
                 }
             }
         } catch (IOException | SlackApiException e) {

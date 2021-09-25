@@ -10,6 +10,7 @@ public class HttpsHelper  extends ApiHelper {
     private final Logger log = LogManager.getLogger(HttpsHelper.class);
 
     public void as(){
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.relaxedHTTPSValidation();
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);

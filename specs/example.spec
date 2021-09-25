@@ -20,7 +20,6 @@
 
 ## Testt....
 
-* Define new request
 * Add log filter with errorStatus
      |Status Codes|
      |400         |

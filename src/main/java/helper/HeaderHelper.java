@@ -20,10 +20,9 @@ public class HeaderHelper extends ApiHelper {
      * defineNewRequest() it add bulk header to request
      *
      * @param headers it's headers as map object
-     * @throws RequestNotDefined if request is null, the exception will throw
      */
-    public void addHeaders(Map<String, Object> headers) throws RequestNotDefined {
-        checkIfRequestDefined();
+    public void addHeaders(Map<String, Object> headers) {
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.headers(headers);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
@@ -35,10 +34,9 @@ public class HeaderHelper extends ApiHelper {
      *
      * @param key   it is the header key.
      * @param value it is the header value
-     * @throws RequestNotDefined if request is null, the exception will throw
      */
-    public void addHeader(String key, String value) throws RequestNotDefined {
-        checkIfRequestDefined();
+    public void addHeader(String key, String value) {
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.header(key, value);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
@@ -53,7 +51,7 @@ public class HeaderHelper extends ApiHelper {
      * @throws RequestNotDefined if request is null, the exception will throw
      */
     public void addSOAPAction(String soapAction) throws RequestNotDefined {
-        checkIfRequestDefined();
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.header("SOAPAction", soapAction);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
@@ -63,14 +61,13 @@ public class HeaderHelper extends ApiHelper {
      * it is add to the request bearer token as header
      *
      * @param accessToken it is the token.
-     * @throws RequestNotDefined if request is null, the exception will throw
      */
-    public void addBearerTokenToHeader(String accessToken) throws RequestNotDefined {
+    public void addBearerTokenToHeader(String accessToken) {
         addHeader("Authorization", "Bearer " + accessToken);
     }
 
-    public void addMultiPartContentType(String defaultBoundary) throws RequestNotDefined {
-        checkIfRequestDefined();
+    public void addMultiPartContentType(String defaultBoundary) {
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.contentType("multipart/form-data")
                 .config(RestAssuredConfig

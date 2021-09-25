@@ -4,7 +4,6 @@ import enums.RequestInfo;
 import exceptions.NullResponse;
 import exceptions.RequestNotDefined;
 import io.restassured.RestAssured;
-
 import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,7 +45,14 @@ public class ApiHelper {
 
         StoreApiInfo.put(RequestInfo.REQUEST.info, RestAssured
                 .given());
+        log.info("new request defined");
         return (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
+    }
+
+    public void defineNewRequestIfNull() {
+        if (StoreApiInfo.get(RequestInfo.REQUEST.info) == null) {
+            defineNewRequest();
+        }
     }
 
 

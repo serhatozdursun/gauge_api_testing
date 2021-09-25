@@ -26,7 +26,7 @@ public class RequestBodyHelper extends ApiHelper {
      */
     public void addBody(Object body) throws RequestNotDefined {
         Utils utils = new Utils();
-        checkIfRequestDefined();
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
@@ -41,7 +41,7 @@ public class RequestBodyHelper extends ApiHelper {
      * @throws RequestNotDefined if request is null, the exception will throw
      */
     public void addBody(Map<Object, Object> body) throws RequestNotDefined {
-        checkIfRequestDefined();
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
@@ -55,7 +55,7 @@ public class RequestBodyHelper extends ApiHelper {
      * @throws RequestNotDefined if request is null, the exception will throw
      */
     public void addBody(String body) throws RequestNotDefined {
-        checkIfRequestDefined();
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
@@ -69,7 +69,7 @@ public class RequestBodyHelper extends ApiHelper {
      * @throws RequestNotDefined if request is null, the exception will throw
      */
     public void addBody(File body) throws RequestNotDefined {
-        checkIfRequestDefined();
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
@@ -83,7 +83,7 @@ public class RequestBodyHelper extends ApiHelper {
      * @throws RequestNotDefined if request is null, the exception will throw
      */
     public void addBody(InputStream body) throws RequestNotDefined {
-        checkIfRequestDefined();
+        defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.body(body);
         StoreApiInfo.put(RequestInfo.REQUEST.info, request);
