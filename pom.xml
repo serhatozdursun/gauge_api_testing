@@ -29,7 +29,10 @@
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <jacoco.version>0.8.6</jacoco.version>
         <slack.version>1.12.1</slack.version>
+        <javax.xml.parsers.DocumentBuilderFactory>org.apache.xerces.jaxp.DocumentBuilderFactoryImpl</javax.xml.parsers.DocumentBuilderFactory>
     </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>com.slack.api</groupId>
@@ -64,7 +67,6 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -123,8 +125,6 @@
             <version>${jacoco.version}</version>
         </dependency>
     </dependencies>
-
-
 
     <build>
         <plugins>

@@ -12,14 +12,21 @@ import org.apache.logging.log4j.Logger;
 public class JsonSchemaImp extends JsonSchemaHelper {
 
     private final Logger log = LogManager.getLogger(JsonSchemaImp.class);
+    private static final String ERROR_OCCURRED = "An error occurred; {}";
+    private static final String VALIDATE = "{} json validate with {} schema";
+    private static final String VALIDATE_2 = "response json validate with {} schema";
 
-    @Step("Validate response json with schema <Schema Name>")
+
+
+    @Step({"Validate response json with schema <Schema Name>",
+            "Validate response json with schema <Schema Name> which is in from class path",
+            "Responsu resource da tanımlanan şema <schema name> ile dorğulayın"})
     public void validateJsonSchema(String schemaName) throws NullResponse {
         try {
             jsonSchemaValidatior(schemaName);
             log.info("response validate with {} json schema", schemaName);
         } catch (Exception e) {
-            log.error("An error occurred; {}", e.getMessage());
+            log.error(ERROR_OCCURRED, e.getMessage());
             throw e;
         }
     }
@@ -30,9 +37,9 @@ public class JsonSchemaImp extends JsonSchemaHelper {
             String responseJsonString = String.valueOf(ScenarioDataStore.get(jsonStoreKey));
             String jsonSchema = String.valueOf(ScenarioDataStore.get(schemaStoreKey));
             jsonSchemaValidatior(responseJsonString, jsonSchema);
-            log.info("{} json validate with {} schema", jsonStoreKey, schemaStoreKey);
+            log.info(VALIDATE, jsonStoreKey, schemaStoreKey);
         } catch (Exception e) {
-            log.error("An error occurred; {}", e.getMessage());
+            log.error(ERROR_OCCURRED, e.getMessage());
             throw e;
         }
     }
@@ -42,9 +49,9 @@ public class JsonSchemaImp extends JsonSchemaHelper {
         try {
             String responseJsonString = String.valueOf(ScenarioDataStore.get(jsonStoreKey));
             jsonSchemaValidatiorInClasspath(responseJsonString, schemaName);
-            log.info("{} json validate with {} schema", jsonStoreKey, schemaName);
+            log.info(VALIDATE, jsonStoreKey, schemaName);
         } catch (Exception e) {
-            log.error("An error occurred; {}", e.getMessage());
+            log.error(ERROR_OCCURRED, e.getMessage());
             throw e;
         }
     }
@@ -54,9 +61,9 @@ public class JsonSchemaImp extends JsonSchemaHelper {
         try {
             String responseJsonString = String.valueOf(SpecDataStore.get(jsonStoreKey));
             jsonSchemaValidatiorInClasspath(responseJsonString, schemaName);
-            log.info("{} json validate with {} schema", jsonStoreKey, schemaName);
+            log.info(VALIDATE, jsonStoreKey, schemaName);
         } catch (Exception e) {
-            log.error("An error occurred; {}", e.getMessage());
+            log.error(ERROR_OCCURRED, e.getMessage());
             throw e;
         }
     }
@@ -66,9 +73,9 @@ public class JsonSchemaImp extends JsonSchemaHelper {
         try {
             String responseJsonString = String.valueOf(SuiteDataStore.get(jsonStoreKey));
             jsonSchemaValidatiorInClasspath(responseJsonString, schemaName);
-            log.info("{} json validate with {} schema", jsonStoreKey, schemaName);
+            log.info(VALIDATE, jsonStoreKey, schemaName);
         } catch (Exception e) {
-            log.error("An error occurred; {}", e.getMessage());
+            log.error(ERROR_OCCURRED, e.getMessage());
             throw e;
         }
     }
@@ -77,9 +84,9 @@ public class JsonSchemaImp extends JsonSchemaHelper {
     public void validateJsonSchemaInClasspathAccordingDraft4(String schemaName) throws NullResponse {
         try {
             jsonSchemaValidatiorWithDraft4(schemaName);
-            log.info("response json validate with {} schema", schemaName);
+            log.info(VALIDATE_2, schemaName);
         } catch (Exception e) {
-            log.error("An error occurred; {}", e.getMessage());
+            log.error(ERROR_OCCURRED, e.getMessage());
             throw e;
         }
     }
@@ -88,9 +95,9 @@ public class JsonSchemaImp extends JsonSchemaHelper {
     public void validateJsonSchemaInClasspathAccordingDraft3(String schemaName) throws NullResponse {
         try {
             jsonSchemaValidatiorWithDraft3(schemaName);
-            log.info("response json validate with {} schema", schemaName);
+            log.info(VALIDATE_2, schemaName);
         } catch (Exception e) {
-            log.error("An error occurred; {}", e.getMessage());
+            log.error(ERROR_OCCURRED, e.getMessage());
             throw e;
         }
     }
@@ -99,9 +106,9 @@ public class JsonSchemaImp extends JsonSchemaHelper {
     public void validateJsonSchemaInClasspathAccordingHyperSchema(String schemaName) throws NullResponse {
         try {
             jsonSchemaValidatiorWithHyperSchema(schemaName);
-            log.info("response json validate with {} schema", schemaName);
+            log.info(VALIDATE_2, schemaName);
         } catch (Exception e) {
-            log.error("An error occurred; {}", e.getMessage());
+            log.error(ERROR_OCCURRED, e.getMessage());
             throw e;
         }
     }

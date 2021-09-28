@@ -2,7 +2,11 @@ package enums;
 
 public enum PropertiesType {
 
-    SLACK_TOKEN("slack_token");
+    SLACK_TOKEN("slack_token"),
+    CONNECTION_STRING("connectionString"),
+    DB_CLASS("dbClass"),
+    DB_USER("dbUser"),
+    DB_PASSWORD("dbPassword");
 
     public final String propertiesTypeText;
 

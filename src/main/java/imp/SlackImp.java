@@ -12,12 +12,14 @@ public class SlackImp extends SlackHelper {
 
     Logger log = LogManager.getLogger(SlackImp.class);
 
-    @Step("Send test result as slack message to webhook <webhook>")
+    @Step({"Send test result as slack message to webhook <webhook>", "" +
+            "Webhook <webhook>'nu kullanarak slack mesajı yolla"})
     public void sendSlackMessage(String webHook) {
         SpecDataStore.put("webHook", webHook);
     }
 
-    @Step("Send test result as slack message to <channel_id>")
+    @Step({"Send test result as slack message to <channel_id>",
+            "Kanalına <channel_id> slack mesajı yolla"})
     public void sendSlackMessageWithToken(String channelId) {
         String token = Configuration.getInstance().getSlackToken();
         if (token != null && !token.equals("")) {

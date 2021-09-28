@@ -1,0 +1,8 @@
+--All Application
+SELECT * FROM msuser.MS_LOAN_APPLICATION
+--All for userID
+SELECT * FROM msuser.MS_LOAN_APPLICATION
+Where USER_ID='123e4567-e89b-12d3-a456-426614174000'
+
+-- Get User ID
+SELECT * FROM msuser.MS_LOAN_APPLICATION WHERE rownum = 1

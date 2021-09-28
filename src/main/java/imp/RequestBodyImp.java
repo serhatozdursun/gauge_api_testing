@@ -83,27 +83,29 @@ public class RequestBodyImp extends RequestBodyHelper {
     }
 
     @Step({"Update <selector>=<value> json from stored scenario with key <key>"})
-    public void updateBody( String selector, String newValue,String key) {
+    public void updateBody(String selector, String newValue, String key) {
         DocumentHelper documentHelper = new DocumentHelper();
         String body = String.valueOf(ScenarioDataStore.get(key));
-        newValue = newValue.equalsIgnoreCase("null")?null:newValue;
+        newValue = newValue.equalsIgnoreCase("null") ? null : newValue;
 
         Object newBody = documentHelper.updateDocument(body, selector, newValue);
         ScenarioDataStore.put(key, newBody);
         log.info("\"{}\" is update as \"{}\" from \"{}\" in scenario store", selector, newValue, key);
     }
 
-    @Step("Get <selector> from response and then check if is not null?")
+    @Step({"Get <selector> from response and then check if is not null?",
+            "Selector <selector> ile responsdand eğer getir ve null olmadığını doğrula"})
     public void checkDataFromResponseIsNotNull(String selector) throws NullResponse, NullValue {
         ResponseBodyHelper responseBodyHelper = new ResponseBodyHelper();
         Object value2 = responseBodyHelper.getResponseElementEvenNull(selector);
         Assertions.assertNotNull(value2, selector + " is null");
     }
 
-    @Step("Get <selector> from response and then check if is null?")
+    @Step({"Get <selector> from response and then check if is null?",
+            "Selector <selector> ile responsdand eğer getir ve null olduğunu doğrula "})
     public void checkDataFromResponseIsNull(String selector) throws NullResponse, NullValue {
         ResponseBodyHelper responseBodyHelper = new ResponseBodyHelper();
         Object value2 = responseBodyHelper.getResponseElementEvenNull(selector);
-        Assertions.assertNull(value2,selector+" is not null");
+        Assertions.assertNull(value2, selector + " is not null");
     }
 }

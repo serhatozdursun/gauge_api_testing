@@ -3,7 +3,6 @@ package helper;
 import enums.MimTypes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +20,8 @@ public class FileHelper {
      * Örneğin: .sql uzantılı dosyaları string olarak okumak için kullanılır
      * Örnek Kullanım: C:\deneme.sql
      *
-     * @param fileDirectory
-     * @return
+     * @param fileDirectory : dosya yolu
+     * @return string değer döner
      */
     public String readFileAsString(String fileDirectory) {
         try {
