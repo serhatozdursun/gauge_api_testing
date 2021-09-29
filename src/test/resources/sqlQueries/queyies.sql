@@ -1,6 +1,9 @@
---All Application
-SELECT * FROM msuser.MS_LOAN_APPLICATION
---All for serhat
-SELECT * FROM msuser.MS_LOAN_APPLICATION
+--Get username
+select username
+from accounts
+where user_id = 1
+--Get all column
+select *
+from accounts
+where user_id = 1
 
-Where USER_ID='1jhgjhgjh'

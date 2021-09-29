@@ -74,3 +74,26 @@
 
 ## test sleep
 * Sleep for "100" milliSecond
+
+## testDb
+* Get column "username" data from query "Get username" result and save in scenario store
+* Get column data from query "Get all column" result and save all column data in suit store with column name
+
+## test
+
+* Add Headers
+|Key    |Value                                                                   |
+|-------|------------------------------------------------------------------------|
+|Host   |https://corporate-banking-dev.ibar.az/statement/v1/statement/download/82|
+|Accept | */*                                                                    |
+* Add base url "https://corporate-banking-dev.ibar.az"
+* Add endpoint "/statement/v1/statement/download/82"
+* Get request
+* Add Bearer token "eyJhbGciOiJIUzI1NiJ9.eyJjdXN0b21lcklkIjoiOTMzNTQ3NyIsImlzcyI6IjI3bmRpb2NRU1BjMW1XYjcxTG8zZVdMNGxJUm1UVTkwIiwiZXhwIjoxNjMyNzQ4MjM0LCJ1c2VySWQiOiIxIiwiaWF0IjoxNjMyNzQ3OTM0LCJyZWZyZXNoLWNvdW50IjoiMSJ9.5BN_3XA8BliSjT1D-ctQ6tcJsAXJcufqH95W4ZA9_pE"
+* Add log filter with errorStatus
+     |Status Codes|
+     |400         |
+     |405         |
+     |415         |
+     |503         |
+* Check if status code is "200"

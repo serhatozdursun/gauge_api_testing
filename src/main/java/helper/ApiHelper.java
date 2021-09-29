@@ -45,7 +45,6 @@ public class ApiHelper {
 
         StoreApiInfo.put(RequestInfo.REQUEST.info, RestAssured
                 .given());
-        log.info("new request defined");
         return (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
     }
 

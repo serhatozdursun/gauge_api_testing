@@ -46,7 +46,7 @@ public class SlackHelper {
         String channelId = String.valueOf(SpecDataStore.get("channelId"));
         if (webHook != null && !webHook.equals("") && !webHook.equals("null"))
             sendSlackMessageWithWebHook(webHook);
-        else if (slackToken != null && !slackToken.equals("") && !slackToken.equals("null"))
+        else if (channelId != null && !channelId.equals("") && !channelId.equals("null"))
             sendSlackMessageWithToken(slackToken, channelId);
 
     }

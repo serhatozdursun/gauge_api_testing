@@ -12,8 +12,8 @@ public class DBConnectionHelper {
         String dbClass = Configuration.getInstance().getDbClass();
         String dbUser = Configuration.getInstance().getDbUser();
         String dbPassword = Configuration.getInstance().getDbPassword();
-        Class.forName(dbClass);
         String connectionString = Configuration.getInstance().getConnectionString();
+        Class.forName(dbClass);
         Connection con = DriverManager.getConnection(connectionString, dbUser, dbPassword);
         Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_UPDATABLE);
