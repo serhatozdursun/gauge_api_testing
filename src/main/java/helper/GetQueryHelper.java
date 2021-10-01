@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 
 public class GetQueryHelper {
+    private String query = new String();
 
     private List<Path> allQueries() {
         List<Path> files = new ArrayList<>();
@@ -39,8 +41,25 @@ public class GetQueryHelper {
     public String getQueryName(String queryName) throws IOException {
         List<String> fileContents;
         fileContents = getFileContentAsList();
-        String query = "";
-        for (String content : fileContents) {
+
+        IntStream.range(0, fileContents.size())
+                .forEach(index -> {
+                    IntStream.range(0, fileContents.get(index).split("--").length)
+                            .forEach(indexOfCon -> {
+                                if (fileContents.get(index).split("--")[indexOfCon].contains(queryName))
+                                    clearQueryText(queryName, fileContents.get(index).split("--")[indexOfCon]);
+                            });
+                });
+        return query;
+    }
+
+    private void clearQueryText(String queryName, String queryString) {
+        query = queryString.replaceAll(queryName, "");
+        query = queryString.replaceAll("\\n", " ");
+    }
+
+    /*
+            for (String content : fileContents) {
             for (String queries : content.split("--")) {
                 if (queries.contains(queryName)) {
                     query = queries.replaceAll(queryName, "");
@@ -49,6 +68,5 @@ public class GetQueryHelper {
                 }
             }
         }
-        return query;
-    }
+     */
 }
