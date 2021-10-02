@@ -49,4 +49,5 @@ class AuthHelperTests {
         loggerMockedStatic.close();
         validateMockitoUsage();
     }
+
 }
