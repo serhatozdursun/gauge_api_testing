@@ -79,4 +79,4 @@
     * Get column "username" data from query "Get username" result and save in scenario store
     
 ## get all column
-    * Get column data from query "Get username" result and save all column data in scenario store with column name
+    * Get column data from query "Get all column" result and save all column data in scenario store with column name
