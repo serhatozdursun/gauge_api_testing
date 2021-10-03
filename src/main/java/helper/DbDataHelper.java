@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.sql.*;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class DbDataHelper {
@@ -32,16 +31,9 @@ public class DbDataHelper {
                     ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = stmt.executeQuery(query);
             ResultSetMetaData rm = rs.getMetaData();
-            int countOfColumn = rm.getColumnCount();
             while (rs.next()) {
-                if (countOfColumn == 1) {
-                    for (int i = 1; i <= rm.getColumnCount(); ++i) {
-                        result.put(rm.getColumnName(i), rs.getObject(i));
-                    }
-                } else {
-                    for (int i = 1; i <= rm.getColumnCount(); ++i) {
-                        result.put(rm.getColumnName(i) + "_i", rs.getObject(i));
-                    }
+                for (int i = 1; i <= rm.getColumnCount(); ++i) {
+                    result.put(rm.getColumnName(i), rs.getObject(i));
                 }
             }
             con.close();
@@ -58,15 +50,9 @@ public class DbDataHelper {
 
     protected void setQuery(String queryName) {
         var fileContents = getFileContentAsList();
-
-        IntStream.range(0, fileContents.size())
-                .forEach(index -> Arrays.stream(fileContents.get(index).split("--"))
-                        .forEach(queries -> {
-                            if (queries.contains(queryName)) {
-                                query = queries.replaceAll("[\\n]" + "|" + queryName, " ").trim();
-                            }
-                        }));
-
+        fileContents.forEach(file -> Arrays.stream(file.split("--"))
+                .filter(queries -> queries.contains(queryName))
+                .forEach(queries -> query = queries.replaceAll("[\\n]" + "|" + queryName, " ").trim()));
     }
 
 
@@ -74,16 +60,18 @@ public class DbDataHelper {
         List<Path> files;
         files = allQueries();
         List<String> fileList = new ArrayList<>();
-        files.forEach(path -> {
-            byte[] file = new byte[0];
-            try {
-                file = Files.readAllBytes(path);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            fileList.add(new String(file));
-        });
+        files.forEach(path -> fileList.add(readFile(path)));
         return fileList;
+    }
+
+    private String readFile(Path path) {
+        try {
+            return new String(Files.readAllBytes(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.warn("the sql file couldn't find path: " + path);
+        }
+        return null;
     }
 
     private List<Path> allQueries() {
