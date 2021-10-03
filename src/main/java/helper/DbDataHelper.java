@@ -63,15 +63,14 @@ public class DbDataHelper {
                 .forEach(index -> Arrays.stream(fileContents.get(index).split("--"))
                         .forEach(queries -> {
                             if (queries.contains(queryName)) {
-                                query = queries.replaceAll(queryName, "");
-                                query = query.replaceAll("\\n", " ");
+                                query = queries.replaceAll("[\\n]" + "|" + queryName, " ").trim();
                             }
                         }));
 
     }
 
 
-    private List<String> getFileContentAsList()  {
+    private List<String> getFileContentAsList() {
         List<Path> files;
         files = allQueries();
         List<String> fileList = new ArrayList<>();

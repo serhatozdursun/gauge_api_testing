@@ -103,14 +103,14 @@ public class Utils {
     public Map<String, Object> gaugeDataTableToMap(Table table) {
         List<TableRow> rows = table.getTableRows();
         var map = new HashMap<String, Object>();
-        rows.forEach(row->  map.put(row.getCellValues().get(0), row.getCellValues().get(1)));
+        rows.forEach(row -> map.put(row.getCellValues().get(0), row.getCellValues().get(1)));
         return map;
     }
 
     public Object parsSameType(Object sourceObject, Object targetObject) throws WrongFormatException {
         String className = sourceObject.getClass().getSimpleName();
         ParseHelper parseHelper = new ParseHelper();
-        switch ( className ) {
+        switch (className) {
             case "Integer":
                 try {
                     return parseHelper.parsStringToInt(String.valueOf(targetObject));
