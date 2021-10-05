@@ -1,6 +1,5 @@
 #Examples
 
-    * Send test result as slack message to "qa"
 
 ## Example 1
 
@@ -80,3 +79,9 @@
     
 ## get all column
     * Get column data from query "Get all column" result and save all column data in scenario store with column name
+
+## Generate 16 digit number
+    * Generate a "16" digit number and store it in Scenario store as "digit" key
+    * Log this param "digit"
+    * Generate a max "16" digit number and store it in Scenario store as "max" key
+    * Log this param "max"

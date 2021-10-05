@@ -5,78 +5,101 @@ import com.thoughtworks.gauge.datastore.ScenarioDataStore;
 import com.thoughtworks.gauge.datastore.SpecDataStore;
 import com.thoughtworks.gauge.datastore.SuiteDataStore;
 import helper.RandomHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class RandomDataStore extends RandomHelper {
 
+    private final Logger log = LogManager.getLogger(RandomDataStore.class);
+    private final static String PHONE_INFO = "Phone number created as:{}";
+    private final static String MAIL_INFO = "Mail address created as:{}";
+    private final static String SPECIFY_DIGIT_NUMBER = "The {} digit number created, number: {}";
+
+
     @Step("Generate new phone number and store as <key> during scenario")
     public void generatePhoneNumberScenario(String key) {
-        String phoneNumber = generateGsmNumber();
-        ScenarioDataStore.put(key, phoneNumber);
+        ScenarioDataStore.put(key, generateGsmNumber());
+        log.info(PHONE_INFO, ScenarioDataStore.get(key));
     }
 
     @Step("Generate new phone number and store as <key> during suit")
     public void generatePhoneNumberSuit(String key) {
-        String phoneNumber = generateGsmNumber();
-        SuiteDataStore.put(key, phoneNumber);
+        SuiteDataStore.put(key, generateGsmNumber());
+        log.info(PHONE_INFO, SuiteDataStore.get(key));
+
     }
 
     @Step("Generate new phone number and store as <key> during spec")
     public void generatePhoneNumberSpec(String key) {
-        String phoneNumber = generateGsmNumber();
-        SpecDataStore.put(key, phoneNumber);
+        SpecDataStore.put(key, generateGsmNumber());
+        log.info(PHONE_INFO, SpecDataStore.get(key));
     }
 
     @Step("Generate new mail address and store as <key> during scenario")
     public void generateMailScenario(String key) {
-        String phoneNumber = generateMail();
-        ScenarioDataStore.put(key, phoneNumber);
+        ScenarioDataStore.put(key, generateMail());
+        log.info(MAIL_INFO, ScenarioDataStore.get(key));
+
     }
 
     @Step("Generate new mail and store as <key> during suit")
     public void generateMailSuit(String key) {
-        String phoneNumber = generateMail();
-        SuiteDataStore.put(key, phoneNumber);
+        SuiteDataStore.put(key, generateMail());
+        log.info(MAIL_INFO, SuiteDataStore.get(key));
+
     }
 
     @Step("Generate new phone number and store as <key> during spec")
     public void generateMailSpec(String key) {
-        String phoneNumber = generateMail();
-        SpecDataStore.put(key, phoneNumber);
+        SpecDataStore.put(key, generateMail());
+        log.info(MAIL_INFO, SpecDataStore.get(key));
+
     }
 
     @Step({"Generate a <digit> digit number and store it in Scenario store as <> key",
             "Sayı oluştur, <basamakl> basamaklı ve senaryo deposuna <anahtar> anahtarı ile kaydet"})
     public void generateSpecificDigitNumberStoreScenario(int digit, String key) {
         ScenarioDataStore.put(key, generateNumberByNumberOfDigit(digit));
+        log.info(SPECIFY_DIGIT_NUMBER, digit, ScenarioDataStore.get(key));
+
     }
 
     @Step({"Generate a <digit> digit number and store it in Spec store as <> key",
             "Sayı oluştur, <basamakl> basamaklı ve spec deposuna <anahtar> anahtarı ile kaydet"})
     public void generateSpecificDigitNumberStoreSpec(int digit, String key) {
         SpecDataStore.put(key, generateNumberByNumberOfDigit(digit));
+        log.info(SPECIFY_DIGIT_NUMBER, digit, SpecDataStore.get(key));
     }
 
     @Step({"Generate a <digit> digit number and store it in Suit store as <> key",
             "Sayı oluştur, <basamakl> basamaklı ve suit deposuna <anahtar> anahtarı ile kaydet"})
     public void generateSpecificDigitNumberStoreSuit(int digit, String key) {
-        SpecDataStore.put(key, generateNumberByNumberOfDigit(digit));
+        SuiteDataStore.put(key, generateNumberByNumberOfDigit(digit));
+        log.info(SPECIFY_DIGIT_NUMBER, digit, SuiteDataStore.get(key));
     }
 
     @Step({"Generate a max <max> digit number and store it in Suit store as <> key",
             "Sayı oluştur,en fazla <basamakl> basamaklı ve suit deposuna <anahtar> anahtarı ile kaydet"})
     public void generateNumberStoreSuit(int digit, String key) {
         SpecDataStore.put(key, generateNumber(digit));
+        log.info(SPECIFY_DIGIT_NUMBER, String.valueOf(SuiteDataStore.get(key)).length(),
+                SuiteDataStore.get(key));
     }
 
     @Step({"Generate a max <max> digit number and store it in Spec store as <> key",
             "Sayı oluştur,en fazla <basamakl> basamaklı ve spec deposuna <anahtar> anahtarı ile kaydet"})
     public void generateNumberStoreSpec(int digit, String key) {
         SpecDataStore.put(key, generateNumber(digit));
+        log.info(SPECIFY_DIGIT_NUMBER, String.valueOf(SpecDataStore.get(key)).length(),
+                SpecDataStore.get(key));
     }
 
     @Step({"Generate a max <max> digit number and store it in Scenario store as <> key",
             "Sayı oluştur,en fazla <basamakl> basamaklı ve senaryo deposuna <anahtar> anahtarı ile kaydet"})
     public void generateNumberStoreScenario(int digit, String key) {
         ScenarioDataStore.put(key, generateNumber(digit));
+        log.info(SPECIFY_DIGIT_NUMBER, String.valueOf(ScenarioDataStore.get(key)).length(),
+                ScenarioDataStore.get(key));
     }
 }
