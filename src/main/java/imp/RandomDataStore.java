@@ -104,22 +104,22 @@ public class RandomDataStore extends RandomHelper {
                 ScenarioDataStore.get(key));
     }
 
-    @Step({"Generate a number between <begin number> and <end number> and end and store it in Spec store with <> key as string type",
-            "Sayı oluştur, <ilk numara> ile <son numara> arasında ve spec deposuna <anahtar> anahtarı ile dizi olarak kaydet"})
+    @Step({"Generate a number between <begin number> and <end number> and end and store it in Spec store with <> key",
+            "Sayı oluştur, <ilk numara> ile <son numara> arasında ve spec deposuna <anahtar> anahtarı ile kaydet"})
     public void generateBetweenNumberStoreSpec(int beginNumber, int endNumber, String key) {
         SpecDataStore.put(key, generateNumberBetweenTwoBound(beginNumber, endNumber));
         log.info(BETWEEN_NUMBER, beginNumber, endNumber, SpecDataStore.get(key));
     }
 
-    @Step({"Generate a number between <begin number> and <end number> and end and store it in Suit store with <> key as string type",
-            "Sayı oluştur, <ilk numara> ile <son numara> arasında ve suit deposuna <anahtar> anahtarı ile dizi olarak kaydet"})
+    @Step({"Generate a number between <begin number> and <end number> and end and store it in Suit store with <> key",
+            "Sayı oluştur, <ilk numara> ile <son numara> arasında ve suit deposuna <anahtar> anahtarı ile kaydet"})
     public void generateBetweenNumberStoreSuit(int beginNumber, int endNumber, String key) {
         SuiteDataStore.put(key, generateNumberBetweenTwoBound(beginNumber, endNumber));
         log.info(BETWEEN_NUMBER, beginNumber, endNumber, SuiteDataStore.get(key));
     }
 
-    @Step({"Generate a number between <begin number> and <end number> and end and store it in Scenario store with <> key as string type",
-            "Sayı oluştur, <ilk numara> ile <son numara> arasında ve senaryo deposuna <anahtar> anahtarı ile dizi olarak kaydet"})
+    @Step({"Generate a number between <begin number> and <end number> and end and store it in Scenario store with <> key",
+            "Sayı oluştur, <ilk numara> ile <son numara> arasında ve senaryo deposuna <anahtar> anahtarı ile kaydet"})
     public void generateBetweenNumberStoreScenario(int beginNumber, int endNumber, String key) {
         ScenarioDataStore.put(key, generateNumberBetweenTwoBound(beginNumber, endNumber));
         log.info(BETWEEN_NUMBER, beginNumber, endNumber, ScenarioDataStore.get(key));
