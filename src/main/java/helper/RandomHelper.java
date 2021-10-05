@@ -56,7 +56,7 @@ public class RandomHelper {
     public String generateGsmNumber(GsmType gsmType) {
         int areCodeListSize = gsmType.getAreCodeList().size();
         String areaCode = gsmType.getAreCodeList().get(generateNumber(areCodeListSize));
-        String bodyCode = generateNumberByNumberOfDigit(7);
+        String bodyCode = generateNumberByNumberOfDigitAsString(7);
         return areaCode + bodyCode;
     }
 
@@ -67,7 +67,7 @@ public class RandomHelper {
      * @param numberOfDigit basamak sayısı:
      * @return String
      */
-    public String generateNumberByNumberOfDigit(int numberOfDigit) {
+    public String generateNumberByNumberOfDigitAsString(int numberOfDigit) {
         StringBuilder randomNumber = new StringBuilder();
         for (int i = 0; i < numberOfDigit; i++) {
             int generatedNumber = generateNumber(10);
