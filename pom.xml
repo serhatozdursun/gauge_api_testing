@@ -6,7 +6,7 @@
 
     <groupId>testing_frameworks</groupId>
     <artifactId>gauge_api_testing</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 
 
     <properties>

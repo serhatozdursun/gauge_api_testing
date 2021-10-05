@@ -22,10 +22,10 @@ public class JsonHelper {
 
 
     /**
-     * it is convert the json string to jayway documentcontext.
+     * it is convert the json string to jayway DocumentContext.
      *
      * @param json is string json.
-     * @return return is json string as documentcontext
+     * @return return is json string as DocumentContext
      */
     public DocumentContext getJsonDocumentContext(String json) {
         Configuration configuration = Configuration.builder()
@@ -36,8 +36,8 @@ public class JsonHelper {
     }
 
     /**
-     * it find json object by json key and then update the json value according
-     * the jsonobject type (String, int, bool, etc)
+     * it finds json object by json key and then update the json value according
+     * the jsonobject type (String, int, bool, etc.)
      *
      * @param json     is json as string
      * @param jsonKey  is specified pattern json key.

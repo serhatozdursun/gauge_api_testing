@@ -20,8 +20,8 @@ public class DbDataImp extends DbDataHelper {
             "Query <queryName> sorgusu sonucundan <columnName> sütun verisini scenario deposunda sakla"})
     public void GetQueryResultAndSaveValueWithColumnName(String columnName, String queryName) throws SQLException, ClassNotFoundException, IOException {
         Map<String, Object> queryResults = getQueResult(queryName);
-        queryResults.entrySet().
-                stream()
+        queryResults.entrySet()
+                .stream()
                 .filter(entry -> entry.getKey().equals(columnName))
                 .forEach(entry -> {
                     ScenarioDataStore.put(entry.getKey(), entry.getValue());
@@ -33,8 +33,8 @@ public class DbDataImp extends DbDataHelper {
             "Query <queryName> sorgusu sonucundan <columnName> sütun verisini spec deposunda sakla"})
     public void GetQueryResultAndSaveValueWithColumnNameSpec(String columnName, String queryName) throws SQLException, ClassNotFoundException, IOException {
         Map<String, Object> queryResults = getQueResult(queryName);
-        queryResults.entrySet().
-                stream()
+        queryResults.entrySet()
+                .stream()
                 .filter(entry -> entry.getKey().equals(columnName))
                 .forEach(entry -> {
                     SpecDataStore.put(entry.getKey(), entry.getValue());
@@ -46,8 +46,8 @@ public class DbDataImp extends DbDataHelper {
             "Query <queryName> sorgusu sonucundan <columnName> sütun verisini suit deposunda sakla"})
     public void GetQueryResultAndSaveValueWithColumnNameSuit(String columnName, String queryName) throws SQLException, ClassNotFoundException, IOException {
         Map<String, Object> queryResults = getQueResult(queryName);
-        queryResults.entrySet().
-                stream()
+        queryResults.entrySet()
+                .stream()
                 .filter(entry -> entry.getKey().equals(columnName))
                 .forEach(entry -> {
                     SuiteDataStore.put(entry.getKey(), entry.getValue());
