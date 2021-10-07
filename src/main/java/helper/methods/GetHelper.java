@@ -20,7 +20,7 @@ public class GetHelper extends ApiHelper {
      * @return is request result as response
      * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    public Response getRequest(String url) throws RequestNotDefined {
+    protected Response getRequest(String url) throws RequestNotDefined {
         checkIfRequestDefined();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         Response response = request.get(url)
@@ -38,7 +38,7 @@ public class GetHelper extends ApiHelper {
      * @return is request result as response
      * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    public Response getRequest() throws RequestNotDefined {
+    protected Response getRequest() throws RequestNotDefined {
         checkIfRequestDefined();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         Response response = request.get()

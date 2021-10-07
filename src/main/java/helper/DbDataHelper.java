@@ -17,7 +17,7 @@ public class DbDataHelper {
     private static final Logger log = LogManager.getLogger(DbDataHelper.class);
     private String query = "";
 
-    public HashMap<String, Object> getQueResult(String queryName) throws SQLException, ClassNotFoundException, IOException {
+    protected HashMap<String, Object> getQueResult(String queryName) throws SQLException, ClassNotFoundException, IOException {
         String dbClass = Configuration.getInstance().getDbClass();
         String dbUser = Configuration.getInstance().getDbUser();
         String dbPassword = Configuration.getInstance().getDbPassword();

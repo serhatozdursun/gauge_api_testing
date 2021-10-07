@@ -18,7 +18,7 @@ public class QueryParamsHelper extends ApiHelper {
      * @param key   is param key as string.
      * @param value is param value as string.
      */
-    public void addQueryParam(String key, String value) {
+    protected void addQueryParam(String key, String value) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParam(key, value);
@@ -31,7 +31,7 @@ public class QueryParamsHelper extends ApiHelper {
      *
      * @param qParam bulk params as map object
      */
-    public void addQueryParams(Map<String, Object> qParam) {
+    protected void addQueryParams(Map<String, Object> qParam) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParams(qParam);
@@ -45,7 +45,7 @@ public class QueryParamsHelper extends ApiHelper {
      * @param key   is param key as string.
      * @param value is param value as object.
      */
-    public void addQueryParam(String key, Object value) {
+    protected void addQueryParam(String key, Object value) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParam(key, value);
@@ -60,7 +60,7 @@ public class QueryParamsHelper extends ApiHelper {
      * @param key   is param key as string.
      * @param value is param value as object.
      */
-    public void addQueryParams(String key, Object value) {
+    protected void addQueryParams(String key, Object value) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.queryParams(key, value);

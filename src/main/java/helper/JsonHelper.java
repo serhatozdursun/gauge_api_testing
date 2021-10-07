@@ -27,7 +27,7 @@ public class JsonHelper {
      * @param json is string json.
      * @return return is json string as DocumentContext
      */
-    public DocumentContext getJsonDocumentContext(String json) {
+    protected DocumentContext getJsonDocumentContext(String json) {
         Configuration configuration = Configuration.builder()
                 .jsonProvider(new JacksonJsonNodeJsonProvider())
                 .mappingProvider(new JacksonMappingProvider())
@@ -44,7 +44,7 @@ public class JsonHelper {
      * @param newValue is new value tu update
      * @return is the json string after update.
      */
-    public String updateJsonValue(String json, String jsonKey, String newValue) {
+    protected String updateJsonValue(String json, String jsonKey, String newValue) {
         DocumentContext context = getJsonDocumentContext(json);
         ParseHelper parseHelper = new ParseHelper();
         try {

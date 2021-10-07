@@ -20,7 +20,7 @@ public class PostHelper extends ApiHelper {
      * @return is request result as response
      * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    public Response postRequest(String url) throws RequestNotDefined {
+    protected Response postRequest(String url) throws RequestNotDefined {
         checkIfRequestDefined();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         Response response = request.post(url)
@@ -38,7 +38,7 @@ public class PostHelper extends ApiHelper {
      * @return is request result as response
      * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    public Response postRequest() throws RequestNotDefined {
+    protected Response postRequest() throws RequestNotDefined {
         checkIfRequestDefined();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         Response response = request.post()

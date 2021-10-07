@@ -11,6 +11,7 @@ import exceptions.NullValue;
 import helper.ResponseBodyHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Assertions;
 
 public class ResponseBodyImp extends ResponseBodyHelper {
 
@@ -69,5 +70,18 @@ public class ResponseBodyImp extends ResponseBodyHelper {
         log.info("\"{}\" is stored with {} during spec", selector, key);
     }
 
+    @Step({"Get <selector> from response and then check if is not null?",
+            "Selector <selector> ile responsdand eğer getir ve null olmadığını doğrula"})
+    public void checkDataFromResponseIsNotNull(String selector) throws NullResponse, NullValue {
+        Object value2 = getResponseElementEvenNull(selector);
+        Assertions.assertNotNull(value2, selector + " is null");
+    }
+
+    @Step({"Get <selector> from response and then check if is null?",
+            "Selector <selector> ile responsdand eğer getir ve null olduğunu doğrula "})
+    public void checkDataFromResponseIsNull(String selector) throws NullResponse, NullValue {
+        Object value2 = getResponseElementEvenNull(selector);
+        Assertions.assertNull(value2, selector + " is not null");
+    }
 
 }

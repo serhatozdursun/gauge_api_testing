@@ -13,7 +13,7 @@ public class ResponseTimeHelper extends ApiHelper {
     private final Logger log = LogManager.getLogger(ResponseTimeHelper.class);
     private Long responseTime;
 
-    public Long getRequestTimeInMillis() throws NullResponse {
+    protected Long getRequestTimeInMillis() throws NullResponse {
         checkIfResponseNull();
         Response request = (Response) StoreApiInfo.get(RequestInfo.RESPONSE.info);
         responseTime = request.getTimeIn(TimeUnit.MILLISECONDS);
@@ -21,7 +21,7 @@ public class ResponseTimeHelper extends ApiHelper {
         return responseTime;
     }
 
-    public Long getRequestTimeInSecond() throws NullResponse {
+    protected Long getRequestTimeInSecond() throws NullResponse {
         checkIfResponseNull();
         Response request = (Response) StoreApiInfo.get(RequestInfo.RESPONSE.info);
         responseTime = request.getTimeIn(TimeUnit.SECONDS);

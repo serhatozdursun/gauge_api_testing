@@ -9,7 +9,7 @@ import utils.StoreApiInfo;
 public class HttpsHelper  extends ApiHelper {
     private final Logger log = LogManager.getLogger(HttpsHelper.class);
 
-    public void addRelaxedHTTPSValidation(){
+    protected void addRelaxedHTTPSValidation(){
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.relaxedHTTPSValidation();

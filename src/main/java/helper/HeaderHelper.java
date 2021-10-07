@@ -21,7 +21,7 @@ public class HeaderHelper extends ApiHelper {
      *
      * @param headers it's headers as map object
      */
-    public void addHeaders(Map<String, Object> headers) {
+    protected void addHeaders(Map<String, Object> headers) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.headers(headers);
@@ -35,7 +35,7 @@ public class HeaderHelper extends ApiHelper {
      * @param key   it is the header key.
      * @param value it is the header value
      */
-    public void addHeader(String key, String value) {
+    protected void addHeader(String key, String value) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.header(key, value);
@@ -50,7 +50,7 @@ public class HeaderHelper extends ApiHelper {
      * @param soapAction it is the SOAPAction
      * @throws RequestNotDefined if request is null, the exception will throw
      */
-    public void addSOAPAction(String soapAction) throws RequestNotDefined {
+    protected void addSOAPAction(String soapAction) throws RequestNotDefined {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.header("SOAPAction", soapAction);
@@ -62,11 +62,11 @@ public class HeaderHelper extends ApiHelper {
      *
      * @param accessToken it is the token.
      */
-    public void addBearerTokenToHeader(String accessToken) {
+    protected void addBearerTokenToHeader(String accessToken) {
         addHeader("Authorization", "Bearer " + accessToken);
     }
 
-    public void addMultiPartContentType(String defaultBoundary) {
+    protected void addMultiPartContentType(String defaultBoundary) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.contentType("multipart/form-data")

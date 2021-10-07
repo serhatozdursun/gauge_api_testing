@@ -19,7 +19,7 @@ public class FormParamsHelper extends ApiHelper {
      * @param key   is param key as string.
      * @param value is param value as string.
      */
-    public void addFormParam(String key, String value) {
+    protected void addFormParam(String key, String value) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParam(key, value);
@@ -32,7 +32,7 @@ public class FormParamsHelper extends ApiHelper {
      *
      * @param qParam bulk params as map object
      */
-    public void addFormParams(Map<String, Object> qParam){
+    protected void addFormParams(Map<String, Object> qParam){
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParams(qParam);
@@ -46,7 +46,7 @@ public class FormParamsHelper extends ApiHelper {
      * @param key   is param key as string.
      * @param value is param value as object.
      */
-    public void addFormParam(String key, Object value){
+    protected void addFormParam(String key, Object value){
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParam(key, value);
@@ -61,7 +61,7 @@ public class FormParamsHelper extends ApiHelper {
      * @param key   is param key as string.
      * @param value is param value as object.
      */
-    public void addFormParams(String key, Object value) {
+    protected void addFormParams(String key, Object value) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.formParams(key, value);

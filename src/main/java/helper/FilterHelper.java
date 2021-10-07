@@ -12,7 +12,7 @@ public class FilterHelper extends ApiHelper {
     private final Logger log = LogManager.getLogger(FilterHelper.class);
 
 
-    public void addCustomLogFilter(Integer... statusCode) {
+    protected void addCustomLogFilter(Integer... statusCode) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.filter(new RestAssuredFilter(statusCode));
@@ -20,7 +20,7 @@ public class FilterHelper extends ApiHelper {
         log.info("Log filters added");
     }
 
-    public void addFilter(RestAssuredFilter filter) {
+    protected void addFilter(RestAssuredFilter filter) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.filter(filter);

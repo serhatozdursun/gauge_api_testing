@@ -9,6 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.StoreApiInfo;
 
+import static enums.RequestInfo.REQUEST;
+
 public class ApiHelper {
 
 
@@ -21,7 +23,7 @@ public class ApiHelper {
      */
     protected void checkIfRequestDefined() throws RequestNotDefined {
 
-        if (StoreApiInfo.get(RequestInfo.REQUEST.info) == null) {
+        if (StoreApiInfo.get(REQUEST.info) == null) {
             log.error("Tanımlı bir request yok.");
             throw new RequestNotDefined();
         }
@@ -39,17 +41,16 @@ public class ApiHelper {
         }
     }
 
-    public RequestSpecification defineNewRequest() {
+    protected RequestSpecification defineNewRequest() {
         StoreApiInfo.remove(RequestInfo.RESPONSE.info);
-        StoreApiInfo.remove(RequestInfo.REQUEST.info);
-
-        StoreApiInfo.put(RequestInfo.REQUEST.info, RestAssured
-                .given());
-        return (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
+        StoreApiInfo.remove(REQUEST.info);
+        var request = RestAssured.given();
+        StoreApiInfo.put(REQUEST.info, request);
+        return (RequestSpecification) StoreApiInfo.get(REQUEST.info);
     }
 
-    public void defineNewRequestIfNull() {
-        if (StoreApiInfo.get(RequestInfo.REQUEST.info) == null) {
+    protected void defineNewRequestIfNull() {
+        if (StoreApiInfo.get(REQUEST.info) == null) {
             defineNewRequest();
         }
     }

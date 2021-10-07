@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-class AuthHelperTests {
+class AuthHelperTests extends AuthHelper {
 
     @Mock
     static MockedStatic<LogManager> loggerMockedStatic;
@@ -39,7 +39,7 @@ class AuthHelperTests {
     void basicAuthNullRequestTest() {
         StoreApiInfo.remove(RequestInfo.REQUEST.info);
         Exception exception = assertThrows(RequestNotDefined.class,
-                () -> new AuthHelper().basicAuth("test", "test"));
+                () -> basicAuth("test", "test"));
         String message = "To run this method, please first define a new request with the define newRequest() method.";
         assertEquals(message, exception.getMessage());
     }

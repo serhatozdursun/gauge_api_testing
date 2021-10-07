@@ -29,6 +29,7 @@ public enum MimTypes {
     XML("text/xml");
 
     private final String mimType;
+
     MimTypes(String value) {
         this.mimType = value;
     }

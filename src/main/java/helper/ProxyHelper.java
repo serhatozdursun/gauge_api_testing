@@ -14,7 +14,7 @@ public class ProxyHelper extends ApiHelper {
     private final Logger log = LogManager.getLogger(ProxyHelper.class);
     private static final String LOG_INFO = "{} added as proxy";
 
-    public void proxy(int proxy) {
+    protected void proxy(int proxy) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.proxy(proxy);
@@ -22,7 +22,7 @@ public class ProxyHelper extends ApiHelper {
         log.info(LOG_INFO, proxy);
     }
 
-    public void proxy(String var1, int var2) {
+    protected void proxy(String var1, int var2) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.proxy(var1, var2);
@@ -30,7 +30,7 @@ public class ProxyHelper extends ApiHelper {
         log.info("{}, {} added as proxy", var1, var2);
     }
 
-    public void proxy(String var1) {
+    protected void proxy(String var1) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.proxy(var1);
@@ -38,7 +38,7 @@ public class ProxyHelper extends ApiHelper {
         log.info(LOG_INFO, var1);
     }
 
-    public void proxy(String var1, int var2, String var3) {
+    protected void proxy(String var1, int var2, String var3) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.proxy(var1, var2, var3);
@@ -46,7 +46,7 @@ public class ProxyHelper extends ApiHelper {
         log.info("{},{},{} added as proxy", var1, var2, var3);
     }
 
-    public void proxy(URI var1) {
+    protected void proxy(URI var1) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.proxy(var1);
@@ -54,7 +54,7 @@ public class ProxyHelper extends ApiHelper {
         log.info(LOG_INFO, var1);
     }
 
-    public void proxy(ProxySpecification var1) {
+    protected void proxy(ProxySpecification var1) {
         defineNewRequestIfNull();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         request.proxy(var1).auth();

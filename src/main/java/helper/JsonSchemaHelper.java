@@ -26,7 +26,7 @@ public class JsonSchemaHelper extends ApiHelper {
      * @param json       response json
      * @param jsonSchema schema json
      */
-    public void jsonSchemaValidatior(String json, String jsonSchema) {
+    protected void jsonSchemaValidatior(String json, String jsonSchema) {
         assertThat(json, matchesJsonSchema(jsonSchema));
     }
 
@@ -37,12 +37,12 @@ public class JsonSchemaHelper extends ApiHelper {
      * @param json       response json
      * @param jsonSchema schema json file name
      */
-    public void jsonSchemaValidatiorInClasspath(String json, String jsonSchema) {
+    protected void jsonSchemaValidatiorInClasspath(String json, String jsonSchema) {
         assertThat(json, matchesJsonSchemaInClasspath(jsonSchema));
     }
 
 
-    private void jsonSchemaValidatiorWithSetting(String jsonSchema, SchemaVersion schemaVersion) throws NullResponse {
+    protected void jsonSchemaValidatiorWithSetting(String jsonSchema, SchemaVersion schemaVersion) throws NullResponse {
         checkIfResponseNull();
         try {
             Response response = (Response) StoreApiInfo.get(RequestInfo.RESPONSE.info);
@@ -59,19 +59,19 @@ public class JsonSchemaHelper extends ApiHelper {
         }
     }
 
-    public void jsonSchemaValidatiorWithDraft4(String jsonSchemaName) throws NullResponse {
+    protected void jsonSchemaValidatiorWithDraft4(String jsonSchemaName) throws NullResponse {
         jsonSchemaValidatiorWithSetting(jsonSchemaName, DRAFTV4);
     }
 
-    public void jsonSchemaValidatiorWithDraft3(String jsonSchemaName) throws NullResponse {
+    protected void jsonSchemaValidatiorWithDraft3(String jsonSchemaName) throws NullResponse {
         jsonSchemaValidatiorWithSetting(jsonSchemaName, DRAFTV3);
     }
 
-    public void jsonSchemaValidatiorWithHyperSchema(String jsonSchemaName) throws NullResponse {
+    protected void jsonSchemaValidatiorWithHyperSchema(String jsonSchemaName) throws NullResponse {
         jsonSchemaValidatiorWithSetting(jsonSchemaName, DRAFTV4_HYPERSCHEMA);
     }
 
-    public void jsonSchemaValidatior(String jsonSchemaName) throws NullResponse {
+    protected void jsonSchemaValidatior(String jsonSchemaName) throws NullResponse {
         checkIfResponseNull();
         try {
             Response response = (Response) StoreApiInfo.get(RequestInfo.RESPONSE.info);

@@ -13,7 +13,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.times;
 
-class ApiHelperTest {
+class ApiHelperTest extends ApiHelper {
 
     @Test
     void defineNewRequestTest() {
@@ -28,9 +28,8 @@ class ApiHelperTest {
         restAssuredMockedStatic.when(() -> RestAssured.given()).thenReturn(null);
 
         storeApiInfoMockedStatic.when(() -> StoreApiInfo.put(RequestInfo.RESPONSE.info, null)).thenCallRealMethod();
-        ApiHelper apiHelper = new ApiHelper();
 
-        RequestSpecification result = apiHelper.defineNewRequest();
+        RequestSpecification result = defineNewRequest();
 
         assertNull(result);
         storeApiInfoMockedStatic.verify(() -> StoreApiInfo.remove(anyString()), times(2));

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LogImp {
+public class LogImp extends FilterHelper {
 
 
     private final Logger log = LogManager.getLogger(LogImp.class);
@@ -23,7 +23,6 @@ public class LogImp {
     @Step({"Add log filter with errorStatus <table>", "Bu statü kodları için log filtresi ekle <table>"})
     public void addFilter(Table table) throws RequestNotDefined {
         ParseHelper parseHelper = new ParseHelper();
-        FilterHelper filterHelper = new FilterHelper();
         List<TableRow> rows = table.getTableRows();
         ArrayList<Integer> statusCodes = new ArrayList<>();
 
@@ -34,7 +33,7 @@ public class LogImp {
 
         Integer[] status = new Integer[statusCodes.size()];
         statusCodes.toArray(status);
-        filterHelper.addCustomLogFilter(status);
+        addCustomLogFilter(status);
     }
 
     @Step({"Log <log>", "Logla <log>"})

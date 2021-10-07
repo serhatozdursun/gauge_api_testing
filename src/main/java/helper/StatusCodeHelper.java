@@ -18,7 +18,7 @@ public class StatusCodeHelper extends ApiHelper {
      * @param statusCode is requested status code
      * @throws NullResponse if response is null, it will be throw this exception.
      */
-    public void checkStatusCode(int statusCode) throws NullResponse {
+    protected void checkStatusCode(int statusCode) throws NullResponse {
         checkIfResponseNull();
         Response response = (Response) StoreApiInfo.get(RequestInfo.RESPONSE.info);
         response.then().statusCode(statusCode);
@@ -31,7 +31,7 @@ public class StatusCodeHelper extends ApiHelper {
      * @return is status code as integer
      * @throws NullResponse if response is null, it will be throw this exception.
      */
-    public Integer getStatusCode() throws NullResponse {
+    protected Integer getStatusCode() throws NullResponse {
         checkIfResponseNull();
         try {
             Response response = (Response) StoreApiInfo.get(RequestInfo.RESPONSE.info);

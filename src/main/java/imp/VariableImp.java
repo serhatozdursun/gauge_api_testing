@@ -1,4 +1,4 @@
-package helper;
+package imp;
 
 
 import com.google.gson.JsonObject;
@@ -8,6 +8,7 @@ import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.datastore.ScenarioDataStore;
 import com.thoughtworks.gauge.datastore.SpecDataStore;
 import com.thoughtworks.gauge.datastore.SuiteDataStore;
+import helper.FileHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.Utils;
@@ -15,9 +16,9 @@ import utils.Utils;
 import java.util.Map;
 import java.util.Objects;
 
-public class VariableHelper {
+public class VariableImp {
 
-    private final Logger log = LogManager.getLogger(VariableHelper.class);
+    private final Logger log = LogManager.getLogger(VariableImp.class);
     private static final String LOG_INFO = "{}, {} variable stored";
 
 

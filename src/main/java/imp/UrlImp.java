@@ -10,7 +10,7 @@ public class UrlImp extends RequestUrlHelper {
         addBaseUrl(url);
     }
 
-    @Step({"Add endpoint <url>", "Endpoint ekle <url>"})
+    @Step({"Add endpoint <url>", "Endpoint ekle <url>", "Add base path <url>"})
     public void addBasePathToReq(String url) {
         addBasePath(url);
     }

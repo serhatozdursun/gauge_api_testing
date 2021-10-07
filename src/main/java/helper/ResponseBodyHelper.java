@@ -17,8 +17,6 @@ public class ResponseBodyHelper extends ApiHelper {
 
     private final Logger log = LogManager.getLogger(ResponseBodyHelper.class);
 
-
-
     /**
      * Gets response as String object
      *
@@ -121,7 +119,7 @@ public class ResponseBodyHelper extends ApiHelper {
         }
     }
 
-    public Object getResponseElementEvenNull(String selector) throws NullResponse {
+    protected Object getResponseElementEvenNull(String selector) throws NullResponse {
         String body = getResponseAsString();
         DocumentHelper documentHelper = new DocumentHelper();
         if (documentHelper.isJsonOrXml(body) == JSON)
@@ -130,6 +128,5 @@ public class ResponseBodyHelper extends ApiHelper {
             return getXmlPathValue(selector);
         else
             return null;
-
     }
 }

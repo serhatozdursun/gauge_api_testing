@@ -21,7 +21,7 @@ public class OptionsHelper extends ApiHelper {
      * @return is request result as response
      * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    public Response optionsRequest(String url) throws RequestNotDefined {
+    protected Response optionsRequest(String url) throws RequestNotDefined {
         checkIfRequestDefined();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         Response response = request.options(url)
@@ -39,7 +39,7 @@ public class OptionsHelper extends ApiHelper {
      * @return is request result as response
      * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    public Response optionsRequest() throws RequestNotDefined {
+    protected Response optionsRequest() throws RequestNotDefined {
         checkIfRequestDefined();
         RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         Response response = request.options()

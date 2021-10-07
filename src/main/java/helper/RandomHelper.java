@@ -13,7 +13,7 @@ public class RandomHelper {
      *
      * @return String
      */
-    public String generateMail() {
+    protected String generateMail() {
         return generateMail(generateNumberBetweenTwoBound(4, 10));
     }
 
@@ -23,7 +23,7 @@ public class RandomHelper {
      * @param numberOfDigit adres uzunluğu kaç karakter olsun?
      * @return String
      */
-    public String generateMail(int numberOfDigit) {
+    protected String generateMail(int numberOfDigit) {
         return generateMail(numberOfDigit, MailType.HOTMAIL);
     }
 
@@ -34,7 +34,7 @@ public class RandomHelper {
      * @param mailType      mail tipi ne olsun? Örn: hotmail, yahoo, gmail
      * @return String
      */
-    public String generateMail(int numberOfDigit, MailType mailType) {
+    protected String generateMail(int numberOfDigit, MailType mailType) {
         return generateAlphabetic(numberOfDigit).toLowerCase() + mailType.extension;
     }
 
@@ -43,7 +43,7 @@ public class RandomHelper {
      *
      * @return String
      */
-    public String generateGsmNumber() {
+    protected String generateGsmNumber() {
         return generateGsmNumber(GsmType.TURKCELL);
     }
 
@@ -53,7 +53,7 @@ public class RandomHelper {
      * @param gsmType Gsm operatörü ne olsun? Örn: Vodafone, Turkcell vb.
      * @return String
      */
-    public String generateGsmNumber(GsmType gsmType) {
+    protected String generateGsmNumber(GsmType gsmType) {
         int areCodeListSize = gsmType.getAreCodeList().size();
         String areaCode = gsmType.getAreCodeList().get(generateNumber(areCodeListSize));
         String bodyCode = generateNumberByNumberOfDigitAsString(7);
@@ -67,7 +67,7 @@ public class RandomHelper {
      * @param numberOfDigit basamak sayısı:
      * @return String
      */
-    public String generateNumberByNumberOfDigitAsString(int numberOfDigit) {
+    protected String generateNumberByNumberOfDigitAsString(int numberOfDigit) {
         StringBuilder randomNumber = new StringBuilder();
         for (int i = 0; i < numberOfDigit; i++) {
             int generatedNumber = generateNumber(10);
@@ -85,7 +85,7 @@ public class RandomHelper {
      * @param bound sınır değeri
      * @return int
      */
-    public int generateNumber(int bound) {
+    protected int generateNumber(int bound) {
         SecureRandom random = new SecureRandom();
         return random.nextInt(bound);
     }
@@ -97,7 +97,7 @@ public class RandomHelper {
      * @param numberOfDigit basamak sayısı
      * @return String
      */
-    public String generateAlphanumeric(int numberOfDigit) {
+    protected String generateAlphanumeric(int numberOfDigit) {
         String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         return createRandomString(chars, numberOfDigit);
     }
@@ -108,7 +108,7 @@ public class RandomHelper {
      * @param numberOfDigit basamak sayısı
      * @return String
      */
-    public String generateAlphabetic(int numberOfDigit) {
+    protected String generateAlphabetic(int numberOfDigit) {
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         return createRandomString(chars, numberOfDigit);
     }
@@ -130,7 +130,7 @@ public class RandomHelper {
      * @param endBound   bitir değeri
      * @return int
      */
-    public int generateNumberBetweenTwoBound(int beginBound, int endBound) {
+    protected int generateNumberBetweenTwoBound(int beginBound, int endBound) {
         if (beginBound > endBound) {
             throw new IllegalArgumentException("Start cannot exceed End.");
         } else {
@@ -143,7 +143,7 @@ public class RandomHelper {
      *
      * @return String
      */
-    public String generateTckn() {
+    protected String generateTckn() {
 
         return new TCKNHelper().getTckn();
     }

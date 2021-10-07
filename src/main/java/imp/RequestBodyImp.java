@@ -29,14 +29,14 @@ public class RequestBodyImp extends RequestBodyHelper {
     @Step({"Add payload as String from resource <file name>", "Dosyayadan String tipinde istek body'si ekle <dosya adı>"})
     public void addBodyAsString(String fileName) throws RequestNotDefined {
         FileHelper fileHelper = new FileHelper();
-        String filePath = "src/test/resources/"+fileName;
+        String filePath = "src/test/resources/" + fileName;
         String payLoad = fileHelper.readFileAsString(filePath);
         addBody(payLoad);
     }
 
     @Step({"Add payload as file from resource <file name>", "Dosya tipinde istek body'si ekle <dosya adı>"})
     public void addBodyAsFile(String fileName) throws RequestNotDefined {
-        String filePath = "src/test/resources/"+fileName;
+        String filePath = getClass().getResource(fileName).getPath();
         File file = new File(filePath);
         addBody(file);
     }
@@ -75,7 +75,7 @@ public class RequestBodyImp extends RequestBodyHelper {
         DocumentHelper documentHelper = new DocumentHelper();
         String body = String.valueOf(ScenarioDataStore.get(key));
         String newValue = String.valueOf(ScenarioDataStore.get(key1));
-        newValue = newValue.equalsIgnoreCase("null")?null:newValue;
+        newValue = newValue.equalsIgnoreCase("null") ? null : newValue;
 
         Object newBody = documentHelper.updateDocument(body, selector, newValue);
         ScenarioDataStore.put(key, newBody);
@@ -93,19 +93,5 @@ public class RequestBodyImp extends RequestBodyHelper {
         log.info("\"{}\" is update as \"{}\" from \"{}\" in scenario store", selector, newValue, key);
     }
 
-    @Step({"Get <selector> from response and then check if is not null?",
-            "Selector <selector> ile responsdand eğer getir ve null olmadığını doğrula"})
-    public void checkDataFromResponseIsNotNull(String selector) throws NullResponse, NullValue {
-        ResponseBodyHelper responseBodyHelper = new ResponseBodyHelper();
-        Object value2 = responseBodyHelper.getResponseElementEvenNull(selector);
-        Assertions.assertNotNull(value2, selector + " is null");
-    }
 
-    @Step({"Get <selector> from response and then check if is null?",
-            "Selector <selector> ile responsdand eğer getir ve null olduğunu doğrula "})
-    public void checkDataFromResponseIsNull(String selector) throws NullResponse, NullValue {
-        ResponseBodyHelper responseBodyHelper = new ResponseBodyHelper();
-        Object value2 = responseBodyHelper.getResponseElementEvenNull(selector);
-        Assertions.assertNull(value2, selector + " is not null");
-    }
 }

@@ -13,7 +13,7 @@ public class DocumentHelper {
 
     private final Logger log = LogManager.getLogger(DocumentHelper.class);
 
-    public DocumentType isJsonOrXml(String body) {
+    protected DocumentType isJsonOrXml(String body) {
         if (body.startsWith("<")) {
             return XML;
         } else if (body.startsWith("{") || body.startsWith("[")) {
