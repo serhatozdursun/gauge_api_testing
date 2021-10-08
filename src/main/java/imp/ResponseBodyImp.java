@@ -13,6 +13,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 public class ResponseBodyImp extends ResponseBodyHelper {
 
     private final Logger log = LogManager.getLogger(ResponseBodyImp.class);
@@ -74,14 +77,14 @@ public class ResponseBodyImp extends ResponseBodyHelper {
             "Selector <selector> ile responsdand eğer getir ve null olmadığını doğrula"})
     public void checkDataFromResponseIsNotNull(String selector) throws NullResponse, NullValue {
         Object value2 = getResponseElementEvenNull(selector);
-        Assertions.assertNotNull(value2, selector + " is null");
+        assertNotNull(value2, selector + " is null");
     }
 
     @Step({"Get <selector> from response and then check if is null?",
             "Selector <selector> ile responsdand eğer getir ve null olduğunu doğrula "})
     public void checkDataFromResponseIsNull(String selector) throws NullResponse, NullValue {
         Object value2 = getResponseElementEvenNull(selector);
-        Assertions.assertNull(value2, selector + " is not null");
+        assertNull(value2, selector + " is not null");
     }
 
 }

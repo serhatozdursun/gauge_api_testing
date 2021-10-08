@@ -16,7 +16,7 @@ public class CompareImp {
 
     private static final String ARE_N0T_EQUALS = "They aren't equals";
     private static final String EQUALS = "They are equals";
-    private static final String CONTAINS ="%s isn't contains %s as String";
+    private static final String CONTAINS = "%s isn't contains %s as String";
 
     @Step({"Get <key1> and <key> from scenario store and then compare, Are they equals?",
             "Key <key1> ve <key2>'i senaryo deposundan getir ve eşit olduklarını doğrula",
@@ -173,7 +173,7 @@ public class CompareImp {
         Object value2 = responseBodyHelper.getResponseElement(selector);
         Utils utils = new Utils();
         value = utils.parsSameType(value2, value);
-        assertEquals(value2, value, EQUALS);
+        assertEquals(value, value2, EQUALS);
     }
 
     @Step({"Get <selector> from response and then compare with <value>, Are they not equals?",

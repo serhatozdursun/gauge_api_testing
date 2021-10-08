@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class LogImp extends FilterHelper {
@@ -24,13 +25,10 @@ public class LogImp extends FilterHelper {
     public void addFilter(Table table) throws RequestNotDefined {
         ParseHelper parseHelper = new ParseHelper();
         List<TableRow> rows = table.getTableRows();
-        ArrayList<Integer> statusCodes = new ArrayList<>();
-
-        for (TableRow row : rows) {
-            int statusCode = parseHelper.parsStringToInt(row.getCellValues().get(0));
-            statusCodes.add(statusCode);
-        }
-
+        var statusCodes = rows
+                .stream()
+                .map(row -> parseHelper.parsStringToInt(row.getCellValues().get(0)))
+                .collect(Collectors.toList());
         Integer[] status = new Integer[statusCodes.size()];
         statusCodes.toArray(status);
         addCustomLogFilter(status);

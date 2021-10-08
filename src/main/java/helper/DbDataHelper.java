@@ -17,7 +17,7 @@ public class DbDataHelper {
     private static final Logger log = LogManager.getLogger(DbDataHelper.class);
     private String query = "";
 
-    protected HashMap<String, Object> getQueResult(String queryName) throws SQLException, ClassNotFoundException, IOException {
+    protected HashMap<String, Object> getQueResult(String queryName) throws SQLException, ClassNotFoundException {
         String dbClass = Configuration.getInstance().getDbClass();
         String dbUser = Configuration.getInstance().getDbUser();
         String dbPassword = Configuration.getInstance().getDbPassword();
@@ -48,7 +48,7 @@ public class DbDataHelper {
     }
 
 
-    protected void setQuery(String queryName) {
+    private void setQuery(String queryName) {
         var fileContents = getFileContentAsList();
         fileContents.forEach(file -> Arrays.stream(file.split("--"))
                 .filter(queries -> queries.contains(queryName))

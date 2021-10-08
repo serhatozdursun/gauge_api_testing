@@ -1,5 +1,6 @@
 package filter;
 
+import io.restassured.filter.Filter;
 import io.restassured.filter.FilterContext;
 import io.restassured.response.Response;
 import io.restassured.specification.FilterableRequestSpecification;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class RestAssuredFilter implements io.restassured.filter.Filter {
+public class RestAssuredFilter implements Filter {
 
     private final Logger log = LogManager.getLogger(RestAssuredFilter.class);
     Integer[] failedStatusCode;

@@ -4,9 +4,11 @@ import com.thoughtworks.gauge.Step;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
 import helper.FormParamsHelper;
+import utils.Utils;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FormParamImp extends FormParamsHelper {
 
@@ -27,11 +29,8 @@ public class FormParamImp extends FormParamsHelper {
 
     @Step({"Add form parameters <table>", "Form parametrelerini ekle <table>"})
     public void addFormParamToReq(Table table){
-        List<TableRow> rows = table.getTableRows();
-        HashMap<String, Object> parameters = new HashMap<>();
-        for (TableRow row : rows) {
-            parameters.put(row.getCellValues().get(0), row.getCellValues().get(1));
-        }
+        Utils utils = new Utils();
+        Map<String, Object> parameters =utils.gaugeDataTableToMap(table);
         addFormParams(parameters);
     }
 
