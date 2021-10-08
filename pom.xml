@@ -191,7 +191,7 @@
                     <execution>
                         <phase>test</phase>
                         <configuration>
-                            <specsDir>specs</specsDir>
+                            <specsDir>${project.basedir}/specs</specsDir>
                         </configuration>
                         <goals>
                             <goal>execute</goal>
