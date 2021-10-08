@@ -48,6 +48,7 @@ public class RequestBodyImp extends RequestBodyHelper {
             "Dosya tipinde istek body'si ekle <dosya adı>"})
     public void addBodyAsFile(String fileName) throws RequestNotDefined {
         String filePath = Objects.requireNonNull(getClass().getClassLoader().getResource(fileName)).getPath();
+
         File file = new File(filePath);
         addBody(file);
     }
