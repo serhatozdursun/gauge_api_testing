@@ -54,6 +54,7 @@ public class RestAssuredFilter implements Filter {
         }
         return response;
     }
+
     private String getFileAsString(File file) {
         try {
             return FileUtils.readFileToString(file, StandardCharsets.UTF_8);
@@ -98,12 +99,12 @@ public class RestAssuredFilter implements Filter {
         if (!reqSpec.getQueryParams().isEmpty()) {
             log.error(LINE);
             log.error("Request Query Parameters:");
-            logMap(reqSpec.getQueryParams(),false);
+            logMap(reqSpec.getQueryParams(), false);
         }
         if (reqSpec.getFormParams().size() > 0) {
             log.error(LINE);
             log.error("Request Form Parameters:");
-            logMap(reqSpec.getFormParams(),false);
+            logMap(reqSpec.getFormParams(), false);
         }
         String prettyJson = utils.prettyPrint(getRequestBody(reqSpec));
         if (getRequestBody(reqSpec) != null && getRequestBody(reqSpec).length() > 0) {
@@ -124,11 +125,11 @@ public class RestAssuredFilter implements Filter {
         if (!reqSpec.getMultiPartParams().isEmpty()) {
             log.error(LINE);
             log.error("Multi-form data:");
-            logMapMultiPartSpecification(reqSpec.getMultiPartParams(),false);
+            logMapMultiPartSpecification(reqSpec.getMultiPartParams(), false);
         }
 
         log.error(LINE);
-        log.error(prettyJson);
+        log.error(utils.prettyPrint(response.getBody().asString()));
 
     }
 
@@ -184,7 +185,7 @@ public class RestAssuredFilter implements Filter {
 
         log.info(LINE);
         log.info("Response Body:");
-        log.info(prettyJson);
+        log.info(utils.prettyPrint(response.getBody().asString()));
     }
 
     private void logMapMultiPartSpecification(List<MultiPartSpecification> reqSpec, boolean isInfo) {
@@ -196,7 +197,7 @@ public class RestAssuredFilter implements Filter {
         }
     }
 
-    private void logMap(Map<String,String> map, boolean isInfo) {
+    private void logMap(Map<String, String> map, boolean isInfo) {
         map.forEach((key, value) -> {
             if (isInfo)
                 log.info("{}:{}", key, value);
