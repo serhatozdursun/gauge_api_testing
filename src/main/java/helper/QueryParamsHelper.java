@@ -8,7 +8,7 @@ import utils.StoreApiInfo;
 
 import java.util.Map;
 
-public class QueryParamsHelper extends ApiHelper {
+public class QueryParamsHelper {
 
     private final Logger log = LogManager.getLogger(QueryParamsHelper.class);
     private static final String LOG_INFO = "{} = {} added to request as query param";
@@ -19,10 +19,7 @@ public class QueryParamsHelper extends ApiHelper {
      * @param value is param value as string.
      */
     protected void addQueryParam(String key, String value) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.queryParam(key, value);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().queryParam(key, value);
         log.info(LOG_INFO, key, value);
     }
 
@@ -32,10 +29,7 @@ public class QueryParamsHelper extends ApiHelper {
      * @param qParam bulk params as map object
      */
     protected void addQueryParams(Map<String, Object> qParam) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.queryParams(qParam);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().queryParams(qParam);
         log.info("{} bulk added to request as query params ", qParam);
     }
 
@@ -46,10 +40,7 @@ public class QueryParamsHelper extends ApiHelper {
      * @param value is param value as object.
      */
     protected void addQueryParam(String key, Object value) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.queryParam(key, value);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().queryParam(key, value);
         var stringValue = String.valueOf(value);
         log.info(LOG_INFO, key, stringValue);
     }
@@ -61,10 +52,7 @@ public class QueryParamsHelper extends ApiHelper {
      * @param value is param value as object.
      */
     protected void addQueryParams(String key, Object value) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.queryParams(key, value);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().queryParams(key, value);
         var stringValue = String.valueOf(value);
         log.info(LOG_INFO, key, stringValue);
     }

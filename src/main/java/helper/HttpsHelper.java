@@ -6,14 +6,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.StoreApiInfo;
 
-public class HttpsHelper  extends ApiHelper {
+public class HttpsHelper {
     private final Logger log = LogManager.getLogger(HttpsHelper.class);
 
     protected void addRelaxedHTTPSValidation(){
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.relaxedHTTPSValidation();
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().relaxedHTTPSValidation();
         log.info("relaxedHTTPSValidation added");
     }
 

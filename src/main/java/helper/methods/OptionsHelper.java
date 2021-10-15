@@ -10,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.StoreApiInfo;
 
-public class OptionsHelper extends ApiHelper {
+public class OptionsHelper {
 
     private final Logger log = LogManager.getLogger(OptionsHelper.class);
 
@@ -19,12 +19,9 @@ public class OptionsHelper extends ApiHelper {
      *
      * @param url url to which the request will be sent
      * @return is request result as response
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    protected Response optionsRequest(String url) throws RequestNotDefined {
-        checkIfRequestDefined();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        Response response = request.options(url)
+    protected Response optionsRequest(String url) {
+        Response response = ApiHelper.getInstance().getRequestSpecification().options(url)
                 .then()
                 .extract()
                 .response();
@@ -37,12 +34,9 @@ public class OptionsHelper extends ApiHelper {
      * Create a options request and update ApiHelper class' response object.
      *
      * @return is request result as response
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    protected Response optionsRequest() throws RequestNotDefined {
-        checkIfRequestDefined();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        Response response = request.options()
+    protected Response optionsRequest() {
+        Response response = ApiHelper.getInstance().getRequestSpecification().options()
                 .then()
                 .extract()
                 .response();

@@ -8,7 +8,7 @@ import utils.StoreApiInfo;
 
 import java.util.Map;
 
-public class FormParamsHelper extends ApiHelper {
+public class FormParamsHelper {
 
     private final Logger log = LogManager.getLogger(FormParamsHelper.class);
     public static final String LOG_INFO = "{} = {} added to request as form param";
@@ -20,10 +20,7 @@ public class FormParamsHelper extends ApiHelper {
      * @param value is param value as string.
      */
     protected void addFormParam(String key, String value) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.formParam(key, value);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().formParam(key, value);
         log.info(LOG_INFO, key, value);
     }
 
@@ -33,10 +30,7 @@ public class FormParamsHelper extends ApiHelper {
      * @param qParam bulk params as map object
      */
     protected void addFormParams(Map<String, Object> qParam){
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.formParams(qParam);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().formParams(qParam);
         log.info("{} added to request as form param", qParam);
     }
 
@@ -47,10 +41,7 @@ public class FormParamsHelper extends ApiHelper {
      * @param value is param value as object.
      */
     protected void addFormParam(String key, Object value){
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.formParam(key, value);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().formParam(key, value);
         var stringValue = String.valueOf(value);
         log.info(LOG_INFO, key, stringValue);
     }
@@ -62,10 +53,7 @@ public class FormParamsHelper extends ApiHelper {
      * @param value is param value as object.
      */
     protected void addFormParams(String key, Object value) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.formParams(key, value);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().formParams(key, value);
         var stringValue = String.valueOf(value);
         log.info(LOG_INFO, key, stringValue);
     }

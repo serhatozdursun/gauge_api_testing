@@ -5,10 +5,7 @@ import com.slack.api.Slack;
 import com.slack.api.methods.SlackApiException;
 import com.slack.api.model.Attachment;
 import com.slack.api.model.Conversation;
-import com.thoughtworks.gauge.AfterScenario;
-import com.thoughtworks.gauge.AfterSpec;
-import com.thoughtworks.gauge.BeforeSpec;
-import com.thoughtworks.gauge.ExecutionContext;
+import com.thoughtworks.gauge.*;
 import com.thoughtworks.gauge.datastore.SpecDataStore;
 import configuration.Configuration;
 import io.restassured.RestAssured;
@@ -34,18 +31,18 @@ public class SlackHelper {
 
     private final Logger log = LogManager.getLogger(SlackHelper.class);
 
-    @BeforeSpec
+    @BeforeSuite
     public void beforeSpec() {
         setStartDate();
     }
 
-    @AfterSpec
+    @AfterSuite
     public void sendSlackMessage() {
-        String webHook = String.valueOf(SpecDataStore.get("webHook"));
+        boolean webHook = SpecDataStore.get("webHook") != null && (boolean) SpecDataStore.get("webHook");
         String slackToken = Configuration.getInstance().getSlackToken();
         String channelId = String.valueOf(SpecDataStore.get("channelId"));
-        if (webHook != null && !webHook.equals("") && !webHook.equals("null"))
-            sendSlackMessageWithWebHook(webHook);
+        if (webHook)
+            sendSlackMessageWithWebHook(Configuration.getInstance().webhook());
         else if (channelId != null && !channelId.equals("") && !channelId.equals("null"))
             sendSlackMessageWithToken(slackToken, channelId);
 
@@ -57,11 +54,10 @@ public class SlackHelper {
     }
 
     private void sendMessageToSlackWebHook(Object body) {
-        String webHook = String.valueOf(SpecDataStore.get("webHook"));
         Response response = RestAssured
                 .given()
                 .header("Content-type", "application/json")
-                .baseUri(webHook)
+                .baseUri(Configuration.getInstance().webhook())
                 .body(body.toString())
                 .post();
         if (response.statusCode() != 200) {
@@ -70,9 +66,13 @@ public class SlackHelper {
     }
 
     private static synchronized void setStartDate() {
+        startDate = getDate();
+    }
+
+    private static String getDate() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        startDate = dtf.format(now);
+        return dtf.format(now);
     }
 
     private static synchronized void countPassFailAndExecuted(ExecutionContext context) {
@@ -156,6 +156,7 @@ public class SlackHelper {
 
     private String createText() {
         String message = "*Test Start:* " + startDate + "\n" +
+                "*Test End:* " + getDate() + "\n" +
                 "*" + executed + "* executed,  " +
                 "*" + passCount + "* passed, " +
                 "*" + failCount + "* failed";

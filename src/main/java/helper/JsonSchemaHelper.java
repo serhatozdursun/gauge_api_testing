@@ -15,7 +15,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class JsonSchemaHelper extends ApiHelper {
+public class JsonSchemaHelper extends ResponseBodyHelper {
 
     private final Logger log = LogManager.getLogger(JsonSchemaHelper.class);
 

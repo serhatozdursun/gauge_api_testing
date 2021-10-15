@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.StoreApiInfo;
 
-public class GetHelper extends ApiHelper {
+public class GetHelper {
 
     private final Logger log = LogManager.getLogger(GetHelper.class);
 
@@ -18,12 +18,10 @@ public class GetHelper extends ApiHelper {
      *
      * @param url url to which the request will be sent
      * @return is request result as response
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    protected Response getRequest(String url) throws RequestNotDefined {
-        checkIfRequestDefined();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        Response response = request.get(url)
+    protected Response getRequest(String url){
+        Response response = ApiHelper.getInstance().getRequestSpecification()
+                .get(url)
                 .then()
                 .extract()
                 .response();
@@ -36,12 +34,9 @@ public class GetHelper extends ApiHelper {
      * Create a get request and update ApiHelper class' response object.
      *
      * @return is request result as response
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    protected Response getRequest() throws RequestNotDefined {
-        checkIfRequestDefined();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        Response response = request.get()
+    protected Response getRequest() {
+        Response response = ApiHelper.getInstance().getRequestSpecification().get()
                 .then()
                 .extract()
                 .response();

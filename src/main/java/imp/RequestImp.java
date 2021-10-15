@@ -6,13 +6,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
-public class RequestImp extends ApiHelper {
+public class RequestImp {
 
     private final Logger log = LogManager.getLogger(RequestImp.class);
 
     @Step({"Define new request", "Yeni bir api isteği tanımla"})
     public void defineNewApiRequest() {
-        defineNewRequest();
+        ApiHelper.getInstance().defineNewRequest();
         log.info("New request defined");
     }
 }

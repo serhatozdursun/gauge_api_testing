@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.InputStream;
 import java.util.Properties;
 
+import static enums.PropertiesType.*;
+
 public class Configuration {
 
     private static Configuration instance;
@@ -19,6 +21,7 @@ public class Configuration {
     private String dbClass;
     private String dbPassword;
     private String dbUser;
+    private String webhook;
 
     public static Configuration getInstance() {
         if (instance == null) {
@@ -38,11 +41,12 @@ public class Configuration {
         try (InputStream is = ClassLoader.getSystemResourceAsStream(PROP_FILE_NAME)) {
             configProps = new Properties();
             configProps.load(is);
-            this.slackToken = configProps.getProperty(PropertiesType.SLACK_TOKEN.getText());
-            this.connectionString = configProps.getProperty(PropertiesType.CONNECTION_STRING.getText());
-            this.dbClass = configProps.getProperty(PropertiesType.DB_CLASS.getText());
-            this.dbUser = configProps.getProperty(PropertiesType.DB_USER.getText());
-            this.dbPassword = configProps.getProperty(PropertiesType.DB_PASSWORD.getText());
+            slackToken = configProps.getProperty(SLACK_TOKEN.getText());
+            connectionString = configProps.getProperty(CONNECTION_STRING.getText());
+            dbClass = configProps.getProperty(DB_CLASS.getText());
+            dbUser = configProps.getProperty(DB_USER.getText());
+            dbPassword = configProps.getProperty(DB_PASSWORD.getText());
+            webhook = configProps.getProperty(WEBHOOK.getText());
         } catch (Exception e) {
             log.error(e);
         } finally {
@@ -69,6 +73,10 @@ public class Configuration {
 
     public String getDbUser() {
         return dbUser;
+    }
+
+    public String webhook() {
+        return webhook;
     }
 
 

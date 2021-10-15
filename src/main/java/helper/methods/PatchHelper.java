@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.StoreApiInfo;
 
-public class PatchHelper extends ApiHelper {
+public class PatchHelper {
 
     private final Logger log = LogManager.getLogger(PatchHelper.class);
 
@@ -18,12 +18,9 @@ public class PatchHelper extends ApiHelper {
      *
      * @param url url to which the request will be sent
      * @return is request result as response
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    protected Response patchRequest(String url) throws RequestNotDefined {
-        checkIfRequestDefined();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        Response response = request.patch(url)
+    protected Response patchRequest(String url) {
+        Response response = ApiHelper.getInstance().getRequestSpecification().patch(url)
                 .then()
                 .extract()
                 .response();
@@ -36,12 +33,9 @@ public class PatchHelper extends ApiHelper {
      * Create a patch request and update ApiHelper class' response object.
      *
      * @return is request result as response
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    protected Response patchRequest() throws RequestNotDefined {
-        checkIfRequestDefined();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        Response response = request.patch()
+    protected Response patchRequest() {
+        Response response = ApiHelper.getInstance().getRequestSpecification().patch()
                 .then()
                 .extract()
                 .response();

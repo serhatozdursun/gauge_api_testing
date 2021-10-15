@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import utils.StoreApiInfo;
 
 
-public class DeleteHelper extends ApiHelper {
+public class DeleteHelper{
 
     private final Logger log = LogManager.getLogger(DeleteHelper.class);
 
@@ -19,12 +19,9 @@ public class DeleteHelper extends ApiHelper {
      *
      * @param url url to which the request will be sent
      * @return is request result as response
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    protected Response deleteRequest(String url) throws RequestNotDefined {
-        checkIfRequestDefined();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        Response response = request.delete(url)
+    protected Response deleteRequest(String url) {
+        Response response = ApiHelper.getInstance().getRequestSpecification().delete(url)
                 .then()
                 .extract()
                 .response();
@@ -37,12 +34,9 @@ public class DeleteHelper extends ApiHelper {
      * Create a delete request and update ApiHelper class' response object.
      *
      * @return is request result as response
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    protected Response deleteRequest() throws RequestNotDefined {
-        checkIfRequestDefined();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        Response response = request.delete()
+    protected Response deleteRequest() {
+        Response response = ApiHelper.getInstance().getRequestSpecification().delete()
                 .then()
                 .extract()
                 .response();

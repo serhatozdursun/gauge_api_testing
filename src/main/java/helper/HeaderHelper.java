@@ -12,7 +12,7 @@ import java.util.Map;
 
 import static io.restassured.config.MultiPartConfig.multiPartConfig;
 
-public class HeaderHelper extends ApiHelper {
+public class HeaderHelper {
 
     private final Logger log = LogManager.getLogger(HeaderHelper.class);
 
@@ -22,10 +22,7 @@ public class HeaderHelper extends ApiHelper {
      * @param headers it's headers as map object
      */
     protected void addHeaders(Map<String, Object> headers) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.headers(headers);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().headers(headers);
         log.info("{} headers added", headers);
     }
 
@@ -36,10 +33,7 @@ public class HeaderHelper extends ApiHelper {
      * @param value it is the header value
      */
     protected void addHeader(String key, String value) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.header(key, value);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().header(key, value);
         log.info("{}, {} header added", key, value);
     }
 
@@ -51,10 +45,7 @@ public class HeaderHelper extends ApiHelper {
      * @throws RequestNotDefined if request is null, the exception will throw
      */
     protected void addSOAPAction(String soapAction) throws RequestNotDefined {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.header("SOAPAction", soapAction);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().header("SOAPAction", soapAction);
     }
 
     /**
@@ -67,9 +58,7 @@ public class HeaderHelper extends ApiHelper {
     }
 
     protected void addMultiPartContentType(String defaultBoundary) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.contentType("multipart/form-data")
+        ApiHelper.getInstance().getRequestSpecification().contentType("multipart/form-data")
                 .config(RestAssuredConfig
                         .config()
                         .multiPartConfig(multiPartConfig()

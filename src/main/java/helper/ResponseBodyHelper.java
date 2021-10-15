@@ -13,7 +13,7 @@ import utils.StoreApiInfo;
 import static enums.DocumentType.JSON;
 import static enums.DocumentType.XML;
 
-public class ResponseBodyHelper extends ApiHelper {
+public class ResponseBodyHelper {
 
     private final Logger log = LogManager.getLogger(ResponseBodyHelper.class);
 
@@ -129,4 +129,17 @@ public class ResponseBodyHelper extends ApiHelper {
         else
             return null;
     }
+
+    /**
+     * response Check if response is null.
+     *
+     * @throws NullResponse if response is null this exception will throw
+     */
+    protected void checkIfResponseNull() throws NullResponse {
+        if (StoreApiInfo.get(RequestInfo.RESPONSE.info) == null) {
+            log.error("Response yok.");
+            throw new NullResponse();
+        }
+    }
+
 }

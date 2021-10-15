@@ -3,12 +3,12 @@ package helper;
 import enums.RequestInfo;
 import exceptions.NullResponse;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.StoreApiInfo;
 
-public class StatusCodeHelper extends ApiHelper {
+public class StatusCodeHelper extends ResponseBodyHelper {
 
     private final Logger log = LogManager.getLogger(StatusCodeHelper.class);
 

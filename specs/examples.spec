@@ -4,12 +4,12 @@ Created by testinium on 29.09.2021
 
 This is an executable specification file which follows markdown syntax.
 Every heading in this file denotes a scenario. Every bulleted point denotes a step.
-
-
+* Send test result as slack message with webhook
 pet post
 ----------------
 * Add payload as file from resource "payloads/petPost.json"
 * Add base url "https://petstore.swagger.io"
+* Add relaxedHTTPSValidation
 * Add endpoint "/v2/pet"
 * Add Headers
     |key            |value              |

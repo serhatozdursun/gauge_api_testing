@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static enums.RequestInfo.REQUEST;
 
-public class PathParameterHelper extends ApiHelper {
+public class PathParameterHelper {
 
     private final Logger log = LogManager.getLogger(PathParameterHelper.class);
     private static final String LOG_INFO = "{} = {} added to request as path param";
@@ -21,10 +21,7 @@ public class PathParameterHelper extends ApiHelper {
      * @param value is param value as string.
      */
     protected void addPathParam(String key, String value) {
-        defineNewRequestIfNull();
-        var request = (RequestSpecification) StoreApiInfo.get(REQUEST.info);
-        request.pathParam(key, value);
-        StoreApiInfo.put(REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().pathParam(key, value);
         log.info(LOG_INFO, key, value);
     }
 
@@ -34,10 +31,7 @@ public class PathParameterHelper extends ApiHelper {
      * @param qParam bulk params as map object
      */
     protected void addPathParams(Map<String, Object> qParam) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(REQUEST.info);
-        request.pathParams(qParam);
-        StoreApiInfo.put(REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().pathParams(qParam);
         log.info("{} bulk added to request as path params ", qParam);
     }
 
@@ -48,10 +42,7 @@ public class PathParameterHelper extends ApiHelper {
      * @param value is param value as object.
      */
     protected void addPathParam(String key, Object value) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(REQUEST.info);
-        request.pathParam(key, value);
-        StoreApiInfo.put(REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().pathParam(key, value);
         var stringValue = String.valueOf(value);
         log.info(LOG_INFO, key, stringValue);
     }
@@ -63,10 +54,7 @@ public class PathParameterHelper extends ApiHelper {
      * @param value is param value as object.
      */
     protected void addPathParams(String key, Object value) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(REQUEST.info);
-        request.pathParams(key, value);
-        StoreApiInfo.put(REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().pathParams(key, value);
         var stringValue = String.valueOf(value);
         log.info(LOG_INFO, key, stringValue);
     }

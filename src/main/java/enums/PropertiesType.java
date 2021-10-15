@@ -6,7 +6,8 @@ public enum PropertiesType {
     CONNECTION_STRING("connectionString"),
     DB_CLASS("dbClass"),
     DB_USER("dbUser"),
-    DB_PASSWORD("dbPassword");
+    DB_PASSWORD("dbPassword"),
+    WEBHOOK("webhook");
 
     public final String propertiesTypeText;
 

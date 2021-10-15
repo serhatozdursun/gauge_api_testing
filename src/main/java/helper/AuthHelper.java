@@ -9,46 +9,30 @@ import org.apache.logging.log4j.Logger;
 import utils.StoreApiInfo;
 
 
-public class AuthHelper extends ApiHelper {
+public class AuthHelper  {
 
     private final Logger log = LogManager.getLogger(AuthHelper.class);
 
 
     protected void basicAuth(String user, String password)  {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.auth().basic(user, password);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().auth().basic(user, password);
         log.info("Basic auth to request as user: {}, password{}", user, password);
     }
 
     protected void preBasicAuth(String user, String password)  {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.auth().preemptive().basic(user, password);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().auth().preemptive().basic(user, password);
     }
 
     protected void oauth2(String var1)  {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.auth().oauth2(var1);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().auth().oauth2(var1);
     }
 
     protected void oauth2(String var1, OAuthSignature var2)  {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.auth().oauth2(var1, var2);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().auth().oauth2(var1, var2);
     }
 
     protected void oauth(String var1, String var2, String var3, String var4)  {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.auth().oauth(var1, var2, var3, var4);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
-
+        ApiHelper.getInstance().getRequestSpecification().auth().oauth(var1, var2, var3, var4);
     }
 
     protected void addBearerToken(String token){

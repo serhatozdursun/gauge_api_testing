@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.StoreApiInfo;
 
-public class HeadHelper extends ApiHelper {
+public class HeadHelper {
 
     private final Logger log = LogManager.getLogger(GetHelper.class);
 
@@ -18,12 +18,9 @@ public class HeadHelper extends ApiHelper {
      *
      * @param url url to which the request will be sent
      * @return is request result as response
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    protected Response headRequest(String url) throws RequestNotDefined {
-        checkIfRequestDefined();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        Response response = request.head(url)
+    protected Response headRequest(String url) {
+        Response response = ApiHelper.getInstance().getRequestSpecification().head(url)
                 .then()
                 .extract()
                 .response();
@@ -36,12 +33,10 @@ public class HeadHelper extends ApiHelper {
      * Create a head request and update ApiHelper class' response object.
      *
      * @return is request result as response
-     * @throws RequestNotDefined if request is undefined, throws this exceptions
      */
-    protected Response headRequest() throws RequestNotDefined {
-        checkIfRequestDefined();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        Response response = request.head()
+    protected Response headRequest()  {
+        Response response = ApiHelper.getInstance().getRequestSpecification()
+                .head()
                 .then()
                 .extract()
                 .response();

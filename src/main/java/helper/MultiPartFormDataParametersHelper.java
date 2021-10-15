@@ -9,45 +9,33 @@ import utils.StoreApiInfo;
 
 import java.io.File;
 
-public class MultiPartFormDataParametersHelper extends ApiHelper {
+public class MultiPartFormDataParametersHelper {
 
     private final Logger log = LogManager.getLogger(MultiPartFormDataParametersHelper.class);
     private static final String LOG_INFO = "{} = {} add to request as multi-part form data";
 
     protected void addMultiPartFormData(File file) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.multiPart(file);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().multiPart(file);
         log.info("{} add to request as multi-part form data", file.getName());
     }
 
     protected void addMultiPartFormData(String key, File file) {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
         String mimeType = new FileHelper().getFileMimeType(file);
-        request.multiPart(new MultiPartSpecBuilder(file)
+        ApiHelper.getInstance().getRequestSpecification().multiPart(new MultiPartSpecBuilder(file)
                 .fileName(file.getName())
                 .controlName(key)
                 .mimeType(mimeType)
                 .build());
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
         log.info(LOG_INFO, key, file.getName());
     }
 
     protected void addMultiPartFormData(String key, String value)  {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.multiPart(key, value);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().multiPart(key, value);
         log.info(LOG_INFO, key, value);
     }
 
     protected void addMultiPartFormData(String key, Object object)  {
-        defineNewRequestIfNull();
-        RequestSpecification request = (RequestSpecification) StoreApiInfo.get(RequestInfo.REQUEST.info);
-        request.multiPart(key, object);
-        StoreApiInfo.put(RequestInfo.REQUEST.info, request);
+        ApiHelper.getInstance().getRequestSpecification().multiPart(key, object);
         log.info(LOG_INFO, key, object.getClass().getName());
     }
 }

@@ -12,10 +12,10 @@ public class SlackImp extends SlackHelper {
 
     Logger log = LogManager.getLogger(SlackImp.class);
 
-    @Step({"Send test result as slack message to webhook <webhook>", "" +
-            "Webhook <webhook>'nu kullanarak slack mesajı yolla"})
-    public void sendSlackMessage(String webHook) {
-        SpecDataStore.put("webHook", webHook);
+    @Step({"Send test result as slack message with webhook", "" +
+            "Webhook' kullanarak slack mesajı yolla"})
+    public void sendSlackMessage() {
+        SpecDataStore.put("webHook", true);
     }
 
     @Step({"Send test result as slack message to <channel_id>",

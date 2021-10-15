@@ -9,7 +9,7 @@ import utils.StoreApiInfo;
 
 import java.util.concurrent.TimeUnit;
 
-public class ResponseTimeHelper extends ApiHelper {
+public class ResponseTimeHelper extends ResponseBodyHelper {
     private final Logger log = LogManager.getLogger(ResponseTimeHelper.class);
     private Long responseTime;
 
