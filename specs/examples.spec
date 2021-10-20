@@ -24,3 +24,26 @@ pet post
     |405    |
 * Post request
 * Check if status code is "200"
+
+
+pet post 2
+----------------
+* Add payload as file from resource "payloads/petPost.json"
+* Add base url "https://petstore.swagger.io"
+* Add relaxedHTTPSValidation
+* Add endpoint "/v2/pet"
+* Add Headers
+    |key            |value              |
+    |---------------|-------------------|
+    |accept         |application/json   |
+    |Content-Type   |application/json   |
+    |Cache-Control  |max-age=0          |
+* Add log filter with errorStatus
+    |Status |
+    |500    |
+    |400    |
+    |405    |
+* Post request
+* Get response time as milliseconds and compare it, is it less then "500"?
+* Sleep for "120" milliSecond
+* Check if status code is "200"

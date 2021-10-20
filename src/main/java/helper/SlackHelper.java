@@ -16,10 +16,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SlackHelper {
 
@@ -70,7 +74,7 @@ public class SlackHelper {
     }
 
     private static String getDate() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }
@@ -155,15 +159,29 @@ public class SlackHelper {
     }
 
     private String createText() {
-        String message = "*Test Start:* " + startDate + "\n" +
-                "*Test End:* " + getDate() + "\n" +
-                "*" + executed + "* executed,  " +
-                "*" + passCount + "* passed, " +
-                "*" + failCount + "* failed";
+        var endDate = getDate();
+        double duration = 0.0;
+        try {
+            duration = calculateDuration(startDate, endDate);
+        } catch (ParseException e) {
+            log.warn("parse error in execution time calculation");
+        }
+        String message = String
+                .format("*Test Start:* %s%n*Test End:* %s%n*Test execution time in seconds*: %.2f%n" +
+                                "*%d* executed,*%d* passed,*%d* failed",
+                        startDate, endDate, duration, executed, passCount, failCount);
+
         if (!failedScenarios.isEmpty())
             message += "\n *Failed scenarios is below:* \n";
 
         return message;
+    }
+
+    private double calculateDuration(String sd, String ed) throws ParseException {
+        var startDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(sd).getTime();
+        var endDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(ed).getTime();
+        var duration = (endDate - startDate);
+        return duration / 1000.0;
     }
 
     private List<Attachment> createAttachments() {
