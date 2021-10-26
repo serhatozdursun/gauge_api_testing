@@ -3,6 +3,9 @@ package utils;
 import com.google.gson.*;
 import com.thoughtworks.gauge.Table;
 import com.thoughtworks.gauge.TableRow;
+import com.thoughtworks.gauge.datastore.ScenarioDataStore;
+import com.thoughtworks.gauge.datastore.SpecDataStore;
+import com.thoughtworks.gauge.datastore.SuiteDataStore;
 import exceptions.WrongFormatException;
 import helper.ParseHelper;
 import helper.XmlHelper;
@@ -147,5 +150,14 @@ public class Utils {
         }
     }
 
+    public static Object getFromStoreData(String key) {
+        if (ScenarioDataStore.get(key) != null)
+            return ScenarioDataStore.get(key);
+        else if (SuiteDataStore.get(key) != null)
+            return SuiteDataStore.get(key);
+        else if (SpecDataStore.get(key) != null)
+            return SpecDataStore.get(key);
+        else return key;
 
+    }
 }

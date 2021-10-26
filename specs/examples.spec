@@ -47,3 +47,18 @@ pet post 2
 * Get response time as milliseconds and compare it, is it less then "500"?
 * Sleep for "120" milliSecond
 * Check if status code is "200"
+
+## String helper test
+* Store variable "key1" = "Tast\n\bRegex" during scenario
+* Store variable "FirstTest" = "First Test First Repalce" during suite
+* Store variable "Un RegEx" = "//[] test" during spec
+* Replace "[\\nb]" old chars to new " " chars on "key1" text and store it on Scenario store with "key2" key
+* Replace "a" old chars to new "e" chars on "Tast" text and store it on Scenario store with "key1" key
+* Replace "First " old chars to new "" chars on "FirstTest" text but only first and store it on Scenario store with "key 3" key
+* Replace "//[] " old chars to new "on iki" chars on "Un RegEx" text and store it on Scenario store with "key4" key
+* Substring text "FirstTest" from "6" index to "24" index then store it in Scenario store with "key" key
+* Substring text "FirstTest" from "6" index to the end then store it in Scenario store with "key" key
+* Substring text "FirstTest" from "6" index to the end then store it in Spec store with "key" key
+* Substring text "FirstTest" from "6" index to the end then store it in Suit store with "key" key
+
+

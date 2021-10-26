@@ -130,13 +130,10 @@ public class SlackHelper {
     }
 
     private String findConversation(String name, String token) {
-        // you can get this instance via ctx.client() in a Bolt app
         var client = Slack.getInstance().methods();
         String conversationId = null;
         try {
-            // Call the conversations.list method using the built-in WebClient
             var result = client.conversationsList(r -> r
-                    // The token you used to initialize your app
                     .token(token)
             );
             if (result.getError() != null) {
@@ -145,9 +142,7 @@ public class SlackHelper {
                 for (Conversation channel : result.getChannels()) {
                     if (channel.getName().equals(name)) {
                         conversationId = channel.getId();
-                        // Print result
                         log.info("Found conversation ID: {}", conversationId);
-                        // Break from for loop
                         break;
                     }
                 }
