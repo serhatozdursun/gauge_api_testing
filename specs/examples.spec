@@ -44,7 +44,9 @@ pet post 2
     |400    |
     |405    |
 * Post request
-* Get response time as milliseconds and compare it, is it less then "500"?
+* Get "tags" from response and store it with "tags" during scenario
+* Get "id" from "tags" json list which one equals "name"="kuçukuçu", and store it during Scenario with "tagId"
+* Get response time as milliseconds and compare it, is it less then "5000"?
 * Sleep for "120" milliSecond
 * Check if status code is "200"
 
