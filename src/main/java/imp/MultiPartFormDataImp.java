@@ -2,6 +2,7 @@ package imp;
 
 import com.thoughtworks.gauge.Step;
 import helper.MultiPartFormDataParametersHelper;
+import io.cucumber.java.en.Given;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,6 +15,7 @@ public class MultiPartFormDataImp extends MultiPartFormDataParametersHelper {
 
     @Step({"Get \"<fileName>\" file and add to request as multi-part form data",
             "File \"<fileName>\" dosyayı recourcedan getir ve multi-part form data olarak ekle"})
+    @Given("Get \"{string}\" file and add to request as multi-part form data")
     public void addMultiPartFormDataToRequest(String filePath) {
         try {
             filePath = Objects.requireNonNull(
@@ -27,6 +29,7 @@ public class MultiPartFormDataImp extends MultiPartFormDataParametersHelper {
 
     @Step({"Get <file> file and add to request with key <key> as multi-part form data",
             "File \"<fileName>\" dosyayı recourcedan getir ve key <key> ile multi-part form data olarak ekle"})
+    @Given("Get {string} file and add to request with key {string} as multi-part form data")
     public void addMultiPartFormDataToRequest(String filePath, String key) {
         filePath = Objects.requireNonNull(getClass().getClassLoader().getResource(filePath)).getFile();
         File file = new File(filePath);
@@ -41,6 +44,7 @@ public class MultiPartFormDataImp extends MultiPartFormDataParametersHelper {
 
     @Step({"Add to request <key>=<value> as multi-part form data",
             "Multi-part parametre olarak ekle <key>=<value>"})
+    @Given("Add to request {string}={string} as multi-part form data")
     public void addMultiPartFormDataToRequestAsString(String key, String value) {
         try {
             addMultiPartFormData(key, value);

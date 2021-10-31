@@ -6,8 +6,10 @@ import com.thoughtworks.gauge.datastore.SpecDataStore;
 import com.thoughtworks.gauge.datastore.SuiteDataStore;
 import exceptions.NullResponse;
 import helper.JsonSchemaHelper;
+import io.cucumber.java.en.Then;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import utils.Utils;
 
 public class JsonSchemaImp extends JsonSchemaHelper {
 
@@ -21,7 +23,9 @@ public class JsonSchemaImp extends JsonSchemaHelper {
     @Step({"Validate response json with schema <Schema Name>",
             "Validate response json with schema <Schema Name> which is in from class path",
             "Responsu resource da tanımlanan şema <schema name> ile dorğulayın"})
+    @Then("Validate response json with schema {string}")
     public void validateJsonSchema(String schemaName) throws NullResponse {
+        schemaName = String.valueOf(Utils.getFromStoreData(schemaName));
         try {
             jsonSchemaValidatior(schemaName);
             log.info("response validate with {} json schema", schemaName);

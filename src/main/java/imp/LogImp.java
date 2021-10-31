@@ -8,6 +8,8 @@ import com.thoughtworks.gauge.datastore.ScenarioDataStore;
 import exceptions.RequestNotDefined;
 import helper.FilterHelper;
 import helper.ParseHelper;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,12 +36,22 @@ public class LogImp extends FilterHelper {
         addCustomLogFilter(status);
     }
 
+    @Given("Log filter with errorStatus")
+    public void addFilter(List<Integer> statusCodes) {
+        ParseHelper parseHelper = new ParseHelper();
+        Integer[] status = new Integer[statusCodes.size()];
+        statusCodes.toArray(status);
+        addCustomLogFilter(status);
+    }
+
     @Step({"Log <log>", "Logla <log>"})
+    @And("Log {string}")
     public void startLog(String log) {
         this.log.info(log);
     }
 
     @Step({"Log this param <key>", "Kayıtlı parametreyi logla <key>"})
+    @And("Log this param {string}")
     public void logThisParam(String key) {
         this.log.info(ScenarioDataStore.get(key));
     }

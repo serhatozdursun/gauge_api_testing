@@ -9,7 +9,7 @@ pet post
 ----------------
 * Add payload as file from resource "payloads/petPost.json"
 * Add base url "https://petstore.swagger.io"
-* Add relaxedHTTPSValidation
+* Add relaxed HTTPS validation
 * Add endpoint "/v2/pet"
 * Add Headers
     |key            |value              |
@@ -30,7 +30,7 @@ pet post 2
 ----------------
 * Add payload as file from resource "payloads/petPost.json"
 * Add base url "https://petstore.swagger.io"
-* Add relaxedHTTPSValidation
+* Add relaxed HTTPS validation
 * Add endpoint "/v2/pet"
 * Add Headers
     |key            |value              |

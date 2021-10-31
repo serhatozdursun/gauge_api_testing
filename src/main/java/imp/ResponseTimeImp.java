@@ -3,6 +3,7 @@ package imp;
 import com.thoughtworks.gauge.Step;
 import exceptions.NullResponse;
 import helper.ResponseTimeHelper;
+import io.cucumber.java.en.Then;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opentest4j.AssertionFailedError;
@@ -14,7 +15,8 @@ public class ResponseTimeImp extends ResponseTimeHelper {
 
     @Step({"Get response time as milliseconds and compare it, is it less then <milliseconds>?",
             "Response zamanını getir ve karşılaştır, <milli saniye> milisaniyeden düşük mü?'"})
-    public void checkResponseTimeAsMillis(Long milliSeconds) throws NullResponse {
+    @Then("Get response time as milliseconds and compare it, is it less then {int} ?")
+    public void checkResponseTimeAsMillis(Integer milliSeconds) throws NullResponse {
         Long responseTime = getRequestTimeInMillis();
 
         try {
@@ -28,7 +30,8 @@ public class ResponseTimeImp extends ResponseTimeHelper {
 
     @Step({"Get response time as seconds and compare it, is it less then <milliseconds>?",
             "Response zamanını getir ve karşılaştır, <saniye> saniyeden düşük mü?'"})
-    public void checkResponseTimeAsSeconds(Long seconds) throws NullResponse {
+    @Then("Get response time as seconds and compare it, is it less then {int} ?")
+    public void checkResponseTimeAsSeconds(Integer seconds) throws NullResponse {
         Long responseTime = getRequestTimeInSecond();
 
         try {

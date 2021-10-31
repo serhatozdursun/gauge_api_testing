@@ -1,10 +1,9 @@
 package helper;
 
-import enums.RequestInfo;
-import io.restassured.specification.RequestSpecification;
+import cucumber.data_tables.CucumberDataTables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import utils.StoreApiInfo;
+
 
 import java.util.Map;
 
@@ -33,6 +32,8 @@ public class FormParamsHelper {
         ApiHelper.getInstance().getRequestSpecification().formParams(qParam);
         log.info("{} added to request as form param", qParam);
     }
+
+
 
     /**
      * Add form param to request

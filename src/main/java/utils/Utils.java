@@ -9,6 +9,7 @@ import com.thoughtworks.gauge.datastore.SuiteDataStore;
 import exceptions.WrongFormatException;
 import helper.ParseHelper;
 import helper.XmlHelper;
+import io.cucumber.datatable.DataTable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
@@ -159,5 +160,14 @@ public class Utils {
             return SpecDataStore.get(key);
         else return key;
 
+    }
+
+    public static void removeFromStoreData(String key) {
+        if (ScenarioDataStore.get(key) != null)
+            ScenarioDataStore.remove(key);
+        else if (SuiteDataStore.get(key) != null)
+            SuiteDataStore.remove(key);
+        else if (SpecDataStore.get(key) != null)
+            SpecDataStore.remove(key);
     }
 }
