@@ -13,7 +13,6 @@ public class AuthHelper  {
 
     private final Logger log = LogManager.getLogger(AuthHelper.class);
 
-
     protected void basicAuth(String user, String password)  {
         ApiHelper.getInstance().getRequestSpecification().auth().basic(user, password);
         log.info("Basic auth to request as user: {}, password{}", user, password);

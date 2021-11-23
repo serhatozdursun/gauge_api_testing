@@ -44,7 +44,7 @@ public class RandomHelper {
      * @return String
      */
     protected String generateGsmNumber() {
-        return generateGsmNumber(GsmType.TURKCELL);
+        return generateGsmNumber(GsmType.TURK_CELL);
     }
 
     /**

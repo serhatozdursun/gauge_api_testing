@@ -23,6 +23,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Objects;
 
 public class XmlHelper {
 
@@ -54,7 +55,7 @@ public class XmlHelper {
      * @param doc   xml or html document for searching.
      * @return found nodes
      */
-    public NodeList getNodesFromXmlDocByXpath(String xPath, Document doc) {
+    private NodeList getNodesFromXmlDocByXpath(String xPath, Document doc) {
         try {
             XPath xpath = XPathFactory.newInstance().newXPath();
             return (NodeList) xpath.evaluate(xPath, doc, XPathConstants.NODESET);
@@ -72,11 +73,11 @@ public class XmlHelper {
      * @param newValue new value to update
      * @return updated document.
      */
-    public Document updateXmlNodesByXpath(String xml, String xPath, String newValue) {
+    protected Document updateXmlNodesByXpath(String xml, String xPath, String newValue) {
         Document doc = stringXmlToDoc(xml);
         NodeList nodes = getNodesFromXmlDocByXpath(xPath, doc);
 
-        for (int idx = 0; idx < nodes.getLength(); idx++) {
+        for (int idx = 0; idx < Objects.requireNonNull(nodes).getLength(); idx++) {
             nodes.item(idx).setTextContent(newValue);
             nodes.item(idx).setNodeValue(newValue);
         }
@@ -89,7 +90,7 @@ public class XmlHelper {
      * @param doc is document to convert to string
      * @return is document as string
      */
-    public String docToXmlString(Document doc) {
+    protected String docToXmlString(Document doc) {
         try {
 
             TransformerFactory tf = TransformerFactory.newInstance();

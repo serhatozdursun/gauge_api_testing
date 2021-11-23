@@ -116,7 +116,7 @@ public class RequestBodyImp extends RequestBodyHelper {
     @Given("Get json from store and update {string} selector = {string} then store it same key {string}")
     public void updateBody(String selector, String newValue, String key) {
         DocumentHelper documentHelper = new DocumentHelper();
-        String body = String.valueOf(ScenarioDataStore.get(key));
+        String body = String.valueOf(Utils.getFromStoreData(key));
         newValue = newValue.equalsIgnoreCase("null") ? null : newValue;
 
         Object newBody = documentHelper.updateDocument(body, selector, newValue);

@@ -3,11 +3,12 @@ package helper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 public class StringHelper {
-    Logger log = LogManager.getLogger(StringHelper.class);
+    private static final Logger log = LogManager.getLogger(StringHelper.class);
 
     /**
      * @param originalText Original text to be replaced
@@ -41,7 +42,7 @@ public class StringHelper {
 
         if (lastIndex != null && lastIndex.length == 1) {
             return text.substring(firstIndex, lastIndex[0]);
-        } else if (lastIndex.length == 0) {
+        } else if (Objects.requireNonNull(lastIndex).length == 0) {
             return text.substring(firstIndex);
         } else {
             log.warn("You send lastIndex param more then once. Online first could be use");

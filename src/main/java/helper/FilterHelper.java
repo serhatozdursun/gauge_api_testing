@@ -1,11 +1,11 @@
 package helper;
 
-import enums.RequestInfo;
 import filter.RestAssuredFilter;
-import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import utils.StoreApiInfo;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class FilterHelper {
 
@@ -14,6 +14,9 @@ public class FilterHelper {
 
     protected void addCustomLogFilter(Integer... statusCode) {
         ApiHelper.getInstance().getRequestSpecification().filter(new RestAssuredFilter(statusCode));
+        log.info("Status added to log filter {}", Arrays.stream(statusCode)
+                .map(String::valueOf)
+                .collect(Collectors.joining(" ")));
     }
 
     protected void addFilter(RestAssuredFilter filter) {

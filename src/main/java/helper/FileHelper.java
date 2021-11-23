@@ -33,7 +33,7 @@ public class FileHelper {
     }
 
 
-    public String getFileMimeType(File file) {
+    protected String getFileMimeType(File file) {
         String type = file.getName().split("[.]")[1].toLowerCase();
 
         switch ( MimTypes.valueOf(type) ) {

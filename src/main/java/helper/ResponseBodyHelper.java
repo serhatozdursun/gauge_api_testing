@@ -23,7 +23,7 @@ public class ResponseBodyHelper {
      * @return is response as String
      * @throws NullResponse if response is null, it will be throw this exception.
      */
-    public String getResponseAsString() throws NullResponse {
+    protected String getResponseAsString() throws NullResponse {
         checkIfResponseNull();
         try {
             Response response = (Response) StoreApiInfo.get(RequestInfo.RESPONSE.info);
@@ -75,7 +75,7 @@ public class ResponseBodyHelper {
      * @return is json element as Object
      * @throws NullResponse if response is null, it will be throw this exception.
      */
-    public Object getJsonPathValue(String selector) throws NullResponse {
+    protected Object getJsonPathValue(String selector) throws NullResponse {
         try {
             return getResponseAsJsonPath().get(selector);
         } catch (Exception e) {
@@ -91,7 +91,7 @@ public class ResponseBodyHelper {
      * @return is xml element as String
      * @throws NullResponse if response is null, it will be throw this exception.
      */
-    public String getXmlPathValue(String selector) throws NullResponse {
+    protected String getXmlPathValue(String selector) throws NullResponse {
         try {
             return getResponseAsXmlPath().get(selector);
         } catch (Exception e) {

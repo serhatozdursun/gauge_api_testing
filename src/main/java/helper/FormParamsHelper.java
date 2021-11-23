@@ -1,16 +1,14 @@
 package helper;
 
-import cucumber.data_tables.CucumberDataTables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 import java.util.Map;
 
 public class FormParamsHelper {
 
     private final Logger log = LogManager.getLogger(FormParamsHelper.class);
-    public static final String LOG_INFO = "{} = {} added to request as form param";
+    private static final String LOG_INFO = "{} = {} added to request as form param";
 
     /**
      * Add form param to request
